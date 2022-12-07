@@ -1,0 +1,24 @@
+.btn {
+  display: block;
+  text-align: center;
+  margin: 0 auto;
+  padding: 1.2rem;
+  border: none;
+  border-radius: 0.8rem;
+}
+
+.btn--link {
+  font-weight: $font-weight;
+  font-size: 1.1rem;
+  line-height: 1.1rem;
+  color: $color-blue;
+  text-decoration: none;
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.btn--primary {
+  background-color: $color-blue;
+  color: $color-white;
+}

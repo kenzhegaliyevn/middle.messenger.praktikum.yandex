@@ -1,0 +1,21 @@
+.status-container-wrapper {
+  @include fullPageScreen;
+}
+
+.status-container {
+  @include absCenter;
+  @include absInnerCenter;
+  flex-direction: column;
+  &__code {
+    font-weight: $font-weight;
+    font-size: 4rem;
+    line-height: 4rem;
+  }
+  &__text {
+    margin-top: 2rem;
+    @include h2;
+  }
+  &__link {
+    margin-top: 6.9rem;
+  }
+}

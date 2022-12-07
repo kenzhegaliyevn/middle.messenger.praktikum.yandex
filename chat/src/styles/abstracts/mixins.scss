@@ -1,0 +1,31 @@
+@mixin clearfix {
+  &::after {
+    content: '';
+    display: table;
+    clear: both;
+  }
+}
+
+@mixin absCenter {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@mixin absInnerCenter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin fullPageScreen {
+  height: 100vh;
+  background-color: $color-white;
+}
+
+@mixin h2 {
+  font-weight: $font-weight;
+  font-size: 2rem;
+  line-height: 2rem;
+}

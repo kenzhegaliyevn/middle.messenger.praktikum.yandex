@@ -1,50 +1,7 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  font-family: 'Inter', sans-serif;
-  font-weight: 400;
-  font-size: 16px;
-  color: #1e1e1e;
-}
-
-.status-container-wrapper {
-  height: 100vh;
-  background-color: #ffffff;
-}
-
-.status-container {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  &__code {
-    font-weight: 500;
-    font-size: 40px;
-    line-height: 40px;
-  }
-  &__text {
-    margin-top: 20px;
-    font-weight: 500;
-    font-size: 20px;
-    line-height: 20px;
-  }
-  &__link {
-    margin-top: 69px;
-    font-weight: 500;
-    font-size: 11px;
-    line-height: 11px;
-    color: #3369f3;
-    text-decoration: none;
-    &:hover {
-      text-decoration: underline;
-    }
-  }
-}
+@import 'abstracts/variables.scss';
+@import 'abstracts/base.scss';
+@import 'abstracts/mixins.scss';
+@import 'pages/status.scss';
+@import 'pages/signin.scss';
+@import 'components/btn.scss';
+@import 'layout/utilities.scss';

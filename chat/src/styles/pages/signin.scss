@@ -1,0 +1,44 @@
+.form-container-wrapper {
+  @include fullPageScreen;
+}
+
+.form-container {
+  @include absCenter;
+  @include absInnerCenter;
+  flex-direction: column;
+  padding: 3rem;
+  box-shadow: 0rem 0rem 0.6rem rgba(0, 0, 0, 0.14);
+  border-radius: 1.2rem;
+  width: 34rem;
+  min-height: 45rem;
+  &__header {
+    @include h2;
+    margin-bottom: 4rem;
+  }
+  &__form {
+    width: 100%;
+  }
+  &__link {
+    margin-top: 1.4rem;
+  }
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  &:not(:last-child) {
+    margin-bottom: 1.6rem;
+  }
+  &__label {
+    font-weight: $font-weight;
+    font-size: 1.3rem;
+    line-height: 1.3rem;
+    color: $color-grey;
+  }
+  &__input {
+    border: none;
+    border-bottom: 0.1rem solid $color-blue;
+    line-height: 1.3rem;
+    padding: 0.7rem 0;
+  }
+}
