@@ -1,0 +1,128 @@
+.chat-wrapper {
+  height: 100vh;
+}
+
+.content {
+  &__text {
+    color: $color-grey;
+    font-weight: $font-weight;
+    font-size: 1.2rem;
+    line-height: 1.2rem;
+  }
+  &-wrapper {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.chat-list {
+  &__header {
+    width: 100%;
+    padding: 2.1rem;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    &__btn {
+      display: flex;
+      align-items: center;
+      font-weight: $font-weight;
+      font-size: 1.2rem;
+      line-height: 1.2rem;
+      text-decoration: none;
+      color: $color-grey;
+      &::after {
+        padding-left: 0.8rem;
+        content: url('../asserts/arrow-right.svg');
+      }
+    }
+  }
+  &__search-wrapper {
+    padding: 1rem;
+    border-bottom: 0.1rem solid $color-grey-light1;
+    input {
+      width: 100%;
+      border: none;
+      text-align: center;
+      padding: 1rem;
+      border-radius: 0.5rem;
+      background-color: $color-grey-light;
+      font-weight: $font-weight;
+      font-size: 1.2rem;
+      line-height: 1.2rem;
+      background-image: url('../asserts/search.svg');
+      background-repeat: no-repeat;
+      background-position: 5% center;
+      color: $color-grey;
+      &::placeholder {
+        color: $color-grey;
+      }
+    }
+  }
+  &-wrapper {
+    height: 100%;
+    overflow-y: auto;
+    background-color: $color-grey-light2;
+    border-right: 0.1rem solid $color-grey-light1;
+  }
+  &__item {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.2rem;
+    border-bottom: 0.1rem solid $color-grey-light1;
+    &__img {
+      background-color: $color-grey-light;
+      width: 4.7rem;
+      height: 4.7rem;
+      border-radius: 50%;
+    }
+    &__text {
+      display: flex;
+      justify-content: flex-start;
+      flex-direction: column;
+      flex: 1 1 auto;
+      padding: 0 1rem;
+      &--name {
+        font-weight: 600;
+        font-size: 1.3rem;
+        line-height: 1.3rem;
+      }
+      &--msg {
+        font-weight: $font-weight;
+        font-size: 1.2rem;
+        line-height: 1.5rem;
+        color: $color-grey;
+        margin-top: 0.4rem;
+      }
+    }
+    &-right {
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      &--time {
+        font-weight: $font-weight;
+        font-size: 0.9rem;
+        line-height: 1.3rem;
+        color: $color-grey;
+        margin-bottom: 1.4rem;
+      }
+      &--notify {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: $color-white;
+        width: 2rem;
+        height: 2rem;
+        background-color: $color-blue;
+        border-radius: 50%;
+        font-weight: $font-weight;
+        font-size: 1.1rem;
+        line-height: 1.2rem;
+      }
+    }
+  }
+}
