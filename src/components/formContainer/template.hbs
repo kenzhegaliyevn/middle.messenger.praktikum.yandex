@@ -1,0 +1,20 @@
+<div class='form-container-wrapper'>
+  <div class='form-container'>
+    <h2 class='form-container__header'>\{{data.header}}</h2>
+    <form class='form-container__form'>
+      {{#each data.fields}}
+        <div class='field'>
+          <label for={{fieldName}} class='field__label'>\{{fieldLabel}}</label>
+          <input
+            type=\{{fieldType}}
+            id=\{{fieldName}}
+            class='field__input'
+            name=\{{fieldName}}
+          />
+        </div>
+      {{/each}}
+      \{{> button text=data.button.text class='u-margin-top-big'}}
+    </form>
+    \{{> button-link text=data.subButton class='form-container__link'}}
+  </div>
+</div>
