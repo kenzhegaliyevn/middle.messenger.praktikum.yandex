@@ -15,6 +15,11 @@ body {
   color: #1e1e1e;
 }
 
-.ul-wrapper li {
-  margin-top: 1.2rem;
+.ul-wrapper {
+  li {
+    margin-top: 1.2rem;
+    button {
+      width: 15rem;
+    }
+  }
 }

@@ -4,7 +4,7 @@ export default class FormContainer extends Block {
   static componentName = 'FormContainer';
 
   constructor({ data }: any) {
-    super({ data });
+    super({ data: JSON.parse(data) });
   }
 
   render() {
@@ -24,9 +24,9 @@ export default class FormContainer extends Block {
                 />
               </div>
             {{/each}}
-            {{{ Button text=data.button.text class='u-margin-top-big'}}}
+            {{{ Button text=data.button.text className='u-margin-top-big'}}}
           </form>
-          {{{ ButtonLink text=data.subButton class='form-container__link'}}}
+          {{{ ButtonLink text=data.subButton className='form-container__link'}}}
         </div>
       </div>
     `;
