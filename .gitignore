@@ -3,3 +3,4 @@
 /.parcel-cache
 
 .env
+.DS_Store

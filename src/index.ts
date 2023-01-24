@@ -1,32 +1,108 @@
 import { Block, renderDOM, registerComponent } from './core';
-import { NotFoundPage } from './pages/notFound/notFound';
-import statusContainer from './components/statusContainer';
+// components
+import StatusContainer from './components/StatusContainer';
+import FormContainer from './components/FormContainer';
+import Button from './components/Button';
+import ButtonLink from './components/ButtonLink';
 
-// import OnboardingPage from './pages/onboarding';
-// import LoginPage from './pages/login';
+// pages
+import NotFoundPage from './pages/NotFound';
+import ErrorPage from './pages/Error';
+import SignInPage from './pages/SignIn';
 
 import './styles/style.scss';
 
-// import Button from './components/button';
-// import Link from './components/link';
-// import Input from './components/input';
-// import Layout from './components/layout';
+// components
+registerComponent(StatusContainer);
+registerComponent(FormContainer);
+registerComponent(Button);
+registerComponent(ButtonLink);
 
-registerComponent(statusContainer);
-// registerComponent(Button);
-// registerComponent(Input);
-// registerComponent(Layout);
+// pages
+registerComponent(NotFoundPage);
+registerComponent(ErrorPage);
 
+class MyComponent extends Block {
+  static componentName: 'MyComponent';
+
+  protected getStateFromProps(): void {
+    this.state = {
+      notFoundMethod(e: Event) {
+        e.preventDefault();
+        window.history.pushState({}, '', `${window.location.origin}/404`);
+        renderDOM(new NotFoundPage());
+      },
+      errorPageMethod(e: Event) {
+        e.preventDefault();
+        window.history.pushState({}, '', `${window.location.origin}/500`);
+        renderDOM(new ErrorPage());
+      },
+      signInPageMethod(e: Event) {
+        e.preventDefault();
+        window.history.pushState({}, '', `${window.location.origin}/login`);
+        renderDOM(new SignInPage());
+      },
+      // editUserMethod(e: Event) {
+      //   e.preventDefault();
+      //   window.history.pushState({}, '', `${window.location.origin}/user/edit`);
+      //   renderDOM(new EditUserPage());
+      // },
+      // userPageMethod(e: Event) {
+      //   e.preventDefault();
+      //   window.history.pushState({}, '', `${window.location.origin}/user`);
+      //   renderDOM(new UserPage());
+      // },
+      // editPasswordMethod(e: Event) {
+      //   e.preventDefault();
+      //   window.history.pushState({}, '', `${window.location.origin}/edit-password`);
+      //   renderDOM(new EditPasswordPage());
+      // },
+      // notFoundMethod(e: Event) {
+      //   e.preventDefault();
+      //   window.history.pushState({}, '', `${window.location.origin}/not-found`);
+      //   renderDOM(new NotFoundPage());
+      // },
+      // chatPageMethod(e: Event) {
+      //   e.preventDefault();
+      //   window.history.pushState({}, '', `${window.location.origin}/chat`);
+      //   renderDOM(new ChatPage());
+      // },
+    };
+  }
+
+  // <li><a href="./signup.hbs">Регистрация</a></li>
+  // <li><a href="./profile.hbs">Профиль</a></li>
+  // <li><a href="./chat.hbs">Чат</a></li>
+  // <li><a href="./changeProfile.hbs">Изменить данные</a></li>
+  // <li><a href="./changeProfilePassword.hbs">Изменить пароль</a></li>
+
+  render() {
+    return `
+      <ul class="ul-wrapper">
+        <li>
+          {{{Button
+            type='button'
+            text="Авторизация"
+            onClick=signInPageMethod
+          }}}
+        <li>
+          {{{Button
+            type='button'
+            text="404"
+            onClick=notFoundMethod
+          }}}
+        </li>
+        <li>
+          {{{Button
+            type='button'
+            text="500"
+            onClick=errorPageMethod
+          }}}
+        </li>
+      </ul>
+    `;
+  }
+}
 document.addEventListener('DOMContentLoaded', () => {
-  // DEV: Расскоментировать нужно страницу для отображения
-
-  //   const App = new LoginPage();
-  // const App = new OnboardingPage({
-  //   links: [
-  //     {to: '#signup', text: 'signup'},
-  //     {to: '#login', text: 'login'},
-  //   ]
-  // });
-
-  renderDOM(new NotFoundPage());
+  renderDOM(new MyComponent());
 });

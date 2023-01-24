@@ -7,8 +7,8 @@
     "node": "16.14.0"
   },
   "scripts": {
-    "start": "parcel src/index.html --no-source-maps",
-    "build": "parcel build src/index.html --no-source-maps --no-cache --public-url ./",
+    "dev": "parcel src/index.html --no-cache --open --port=3000",
+    "start": "parcel build src/index.html && node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],

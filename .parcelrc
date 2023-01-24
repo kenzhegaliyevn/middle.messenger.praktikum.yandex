@@ -6,5 +6,8 @@
     "*.hbs": [
       "@anikin/parcel-transformer-handlebars"
     ]
+  },
+  "optimizers": {
+    "*.html": []
   }
 }
