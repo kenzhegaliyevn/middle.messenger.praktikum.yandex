@@ -16,6 +16,8 @@ import SignInPage from './pages/SignIn';
 import SignUpPage from './pages/SignUp';
 import ProfilePage from './pages/Profile';
 import EditPasswordPage from './pages/EditPassword';
+import ChangeProfilePage from './pages/ChangeProfile';
+import ChatPage from './pages/Chat';
 
 import './styles/style.scss';
 
@@ -36,6 +38,8 @@ registerComponent(SignInPage);
 registerComponent(SignUpPage);
 registerComponent(ProfilePage);
 registerComponent(EditPasswordPage);
+registerComponent(ChangeProfilePage);
+registerComponent(ChatPage);
 
 class MyComponent extends Block {
   static componentName: 'MyComponent';
@@ -76,21 +80,22 @@ class MyComponent extends Block {
         );
         renderDOM(new EditPasswordPage());
       },
-      // userPageMethod(e: Event) {
-      //   e.preventDefault();
-      //   window.history.pushState({}, '', `${window.location.origin}/user`);
-      //   renderDOM(new UserPage());
-      // },
-      // chatPageMethod(e: Event) {
-      //   e.preventDefault();
-      //   window.history.pushState({}, '', `${window.location.origin}/chat`);
-      //   renderDOM(new ChatPage());
-      // },
+      changeProfilePageMethod(e: Event) {
+        e.preventDefault();
+        window.history.pushState(
+          {},
+          '',
+          `${window.location.origin}/change-profile`
+        );
+        renderDOM(new ChangeProfilePage());
+      },
+      chatPageMethod(e: Event) {
+        e.preventDefault();
+        window.history.pushState({}, '', `${window.location.origin}/chat`);
+        renderDOM(new ChatPage());
+      },
     };
   }
-
-  // <li><a href="./chat.hbs">Чат</a></li>
-  // <li><a href="./changeProfile.hbs">Изменить данные</a></li>
 
   render() {
     return `
@@ -135,6 +140,20 @@ class MyComponent extends Block {
             type='button'
             text="Изменить пароль"
             onClick=editPasswordMethod
+          }}}
+        </li>
+        <li>
+          {{{Button
+            type='button'
+            text="Изменить данные"
+            onClick=changeProfilePageMethod
+          }}}
+        </li>
+        <li>
+          {{{Button
+            type='button'
+            text="Чат"
+            onClick=chatPageMethod
           }}}
         </li>
       </ul>
