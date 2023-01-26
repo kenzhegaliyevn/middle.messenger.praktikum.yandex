@@ -9,6 +9,7 @@ import ButtonLink from './components/ButtonLink';
 import NotFoundPage from './pages/NotFound';
 import ErrorPage from './pages/Error';
 import SignInPage from './pages/SignIn';
+import Input from './components/Input';
 
 import './styles/style.scss';
 
@@ -17,6 +18,7 @@ registerComponent(StatusContainer);
 registerComponent(FormContainer);
 registerComponent(Button);
 registerComponent(ButtonLink);
+registerComponent(Input);
 
 // pages
 registerComponent(NotFoundPage);

@@ -15,6 +15,6 @@ export default class Button extends Block {
   }
 
   render(): string {
-    return `<button type={type} class='btn btn--primary ${this.props.className}'>{{text}}</button>`;
+    return `<button type=${this.props.type} class='btn btn--primary ${this.props.className}'>{{text}}</button>`;
   }
 }

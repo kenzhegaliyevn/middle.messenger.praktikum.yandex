@@ -7,26 +7,6 @@ export default class SignIn extends Block {
     super();
   }
 
-  // add blur
-  // submit
-
-  // handleBlur() {
-  //   const error = this.props.error as string;
-  //   const { loginInput, passwordInput } = this.refs;
-  //   const inputLoginElement = loginInput.children[0] as HTMLInputElement;
-  //   const inputPasswordElement = passwordInput.children[0] as HTMLInputElement;
-  //   if (
-  //     error === '' &&
-  //     inputLoginElement.value === '' &&
-  //     inputPasswordElement.value === ''
-  //   ) {
-  //     this.setProps({
-  //       ...this.props,
-  //       error: 'Введите логин и пароль',
-  //     });
-  //   }
-  // }
-
   render(): string {
     return `
       <div class='container'>
@@ -36,12 +16,14 @@ export default class SignIn extends Block {
             {
               "fieldLabel": "Логин",
               "fieldName": "login",
-              "fieldType": "text"
+              "fieldType": "text",
+              "ref": "loginInput"
             },
             {
               "fieldLabel": "Пароль",
               "fieldName": "password",
-              "fieldType": "password"
+              "fieldType": "password",
+              "ref": "passwordInput"
             }
           ],
           "button": {
