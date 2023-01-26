@@ -1,0 +1,24 @@
+{
+  "root": true,
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "project": ["./tsconfig.json"]
+  },
+  "plugins": [
+    "@typescript-eslint"
+  ],
+  "extends": [
+    "airbnb",
+    "airbnb-typescript"
+  ],
+  "rules": {
+    "no-param-reassign": 0,
+    "linebreak-style": 0,
+    "@typescript-eslint/no-explicit-any": ["error", { "ignoreRestArgs": false }],
+    "prefer-destructuring": ["error", {"object": true, "array": false}],
+    "no-console": "off",
+    "class-methods-use-this": "off",
+    "no-plusplus": "off"
+  },
+  "ignorePatterns": ["src/core/"]
+}
