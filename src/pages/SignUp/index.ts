@@ -1,7 +1,7 @@
 import Block from '../../core/Block';
 
-export default class SignUp extends Block {
-  static componentName = 'SignUp';
+export default class SignUpPage extends Block {
+  static componentName = 'SignUpPage';
 
   constructor() {
     super();
