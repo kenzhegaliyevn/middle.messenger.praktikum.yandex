@@ -5,13 +5,15 @@ import FormContainer from './components/FormContainer';
 import Button from './components/Button';
 import ButtonLink from './components/ButtonLink';
 import SignUpFormContainer from './components/SignUpFormContainer';
+import Input from './components/Input';
+import ButtonBack from './components/ButtonBack';
 
 // pages
 import NotFoundPage from './pages/NotFound';
 import ErrorPage from './pages/Error';
 import SignInPage from './pages/SignIn';
 import SignUpPage from './pages/SignUp';
-import Input from './components/Input';
+import ProfilePage from './pages/Profile';
 
 import './styles/style.scss';
 
@@ -22,10 +24,14 @@ registerComponent(SignUpFormContainer);
 registerComponent(Button);
 registerComponent(ButtonLink);
 registerComponent(Input);
+registerComponent(ButtonBack);
 
 // pages
 registerComponent(NotFoundPage);
 registerComponent(ErrorPage);
+registerComponent(SignInPage);
+registerComponent(SignUpPage);
+registerComponent(ProfilePage);
 
 class MyComponent extends Block {
   static componentName: 'MyComponent';
@@ -52,11 +58,15 @@ class MyComponent extends Block {
         window.history.pushState({}, '', `${window.location.origin}/signup`);
         renderDOM(new SignUpPage());
       },
-      // editUserMethod(e: Event) {
-      //   e.preventDefault();
-      //   window.history.pushState({}, '', `${window.location.origin}/user/edit`);
-      //   renderDOM(new EditUserPage());
-      // },
+      profileMethod(e: Event) {
+        e.preventDefault();
+        window.history.pushState(
+          {},
+          '',
+          `${window.location.origin}/user/profile`
+        );
+        renderDOM(new ProfilePage());
+      },
       // userPageMethod(e: Event) {
       //   e.preventDefault();
       //   window.history.pushState({}, '', `${window.location.origin}/user`);
@@ -109,6 +119,13 @@ class MyComponent extends Block {
             type='button'
             text="500"
             onClick=errorPageMethod
+          }}}
+        </li>
+        <li>
+          {{{Button
+            type='button'
+            text="Профиль"
+            onClick=profileMethod
           }}}
         </li>
       </ul>

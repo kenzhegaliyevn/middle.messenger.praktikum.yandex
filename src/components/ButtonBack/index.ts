@@ -4,7 +4,7 @@ interface ButtonBackProps {
   onClick: () => void;
 }
 
-export class ButtonBack extends Block {
+export default class ButtonBack extends Block {
   static componentName = 'ButtonBack';
 
   constructor({ onClick }: ButtonBackProps) {
