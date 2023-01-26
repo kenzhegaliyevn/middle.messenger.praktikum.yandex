@@ -4,11 +4,13 @@ import StatusContainer from './components/StatusContainer';
 import FormContainer from './components/FormContainer';
 import Button from './components/Button';
 import ButtonLink from './components/ButtonLink';
+import SignUpFormContainer from './components/SignUpFormContainer';
 
 // pages
 import NotFoundPage from './pages/NotFound';
 import ErrorPage from './pages/Error';
 import SignInPage from './pages/SignIn';
+import SignUpPage from './pages/SignUp';
 import Input from './components/Input';
 
 import './styles/style.scss';
@@ -16,6 +18,7 @@ import './styles/style.scss';
 // components
 registerComponent(StatusContainer);
 registerComponent(FormContainer);
+registerComponent(SignUpFormContainer);
 registerComponent(Button);
 registerComponent(ButtonLink);
 registerComponent(Input);
@@ -41,8 +44,13 @@ class MyComponent extends Block {
       },
       signInPageMethod(e: Event) {
         e.preventDefault();
-        window.history.pushState({}, '', `${window.location.origin}/login`);
+        window.history.pushState({}, '', `${window.location.origin}/signin`);
         renderDOM(new SignInPage());
+      },
+      signUpPageMethod(e: Event) {
+        e.preventDefault();
+        window.history.pushState({}, '', `${window.location.origin}/signup`);
+        renderDOM(new SignUpPage());
       },
       // editUserMethod(e: Event) {
       //   e.preventDefault();
@@ -59,11 +67,6 @@ class MyComponent extends Block {
       //   window.history.pushState({}, '', `${window.location.origin}/edit-password`);
       //   renderDOM(new EditPasswordPage());
       // },
-      // notFoundMethod(e: Event) {
-      //   e.preventDefault();
-      //   window.history.pushState({}, '', `${window.location.origin}/not-found`);
-      //   renderDOM(new NotFoundPage());
-      // },
       // chatPageMethod(e: Event) {
       //   e.preventDefault();
       //   window.history.pushState({}, '', `${window.location.origin}/chat`);
@@ -72,7 +75,6 @@ class MyComponent extends Block {
     };
   }
 
-  // <li><a href="./signup.hbs">Регистрация</a></li>
   // <li><a href="./profile.hbs">Профиль</a></li>
   // <li><a href="./chat.hbs">Чат</a></li>
   // <li><a href="./changeProfile.hbs">Изменить данные</a></li>
@@ -87,6 +89,14 @@ class MyComponent extends Block {
             text="Авторизация"
             onClick=signInPageMethod
           }}}
+        </li>
+        <li>
+          {{{Button
+            type='button'
+            text="Регистрация"
+            onClick=signUpPageMethod
+          }}}
+        </li>
         <li>
           {{{Button
             type='button'

@@ -31,27 +31,26 @@ export default class FormContainer extends Block {
 
   handleAuth(e: Event) {
     e.preventDefault();
-    const { loginInput, passwordInput } = this.refs;
-    const inputLoginElement = loginInput.children[1] as HTMLInputElement;
-    const inputPasswordElement = passwordInput.children[1] as HTMLInputElement;
-    console.log({
-      login: inputLoginElement.value,
-      password: inputPasswordElement.value,
-    });
+    const items: { [key: string]: HTMLInputElement } = {};
+
+    for (const [key, value] of Object.entries(this.refs)) {
+      items[key] = value.children[1] as HTMLInputElement;
+    }
+
     if (this.props.error !== '') {
       this.setProps({
         ...this.props,
         error: '',
       });
     }
-    if (
-      this.props.error === '' &&
-      (inputLoginElement.value === '' || inputPasswordElement.value === '')
-    ) {
-      this.setProps({
-        ...this.props,
-        error: 'Введите логин и пароль',
-      });
+
+    for (const [key, value] of Object.entries(items)) {
+      if (this.props.error === '' && value.value === '') {
+        this.setProps({
+          ...this.props,
+          error: 'Заполните поля',
+        });
+      }
     }
   }
 
