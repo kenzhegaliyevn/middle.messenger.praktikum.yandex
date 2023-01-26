@@ -7,6 +7,7 @@ import ButtonLink from './components/ButtonLink';
 import SignUpFormContainer from './components/SignUpFormContainer';
 import Input from './components/Input';
 import ButtonBack from './components/ButtonBack';
+import ProfileFormContainer from './components/ProfileFormContainer';
 
 // pages
 import NotFoundPage from './pages/NotFound';
@@ -14,6 +15,7 @@ import ErrorPage from './pages/Error';
 import SignInPage from './pages/SignIn';
 import SignUpPage from './pages/SignUp';
 import ProfilePage from './pages/Profile';
+import EditPasswordPage from './pages/EditPassword';
 
 import './styles/style.scss';
 
@@ -25,6 +27,7 @@ registerComponent(Button);
 registerComponent(ButtonLink);
 registerComponent(Input);
 registerComponent(ButtonBack);
+registerComponent(ProfileFormContainer);
 
 // pages
 registerComponent(NotFoundPage);
@@ -32,6 +35,7 @@ registerComponent(ErrorPage);
 registerComponent(SignInPage);
 registerComponent(SignUpPage);
 registerComponent(ProfilePage);
+registerComponent(EditPasswordPage);
 
 class MyComponent extends Block {
   static componentName: 'MyComponent';
@@ -60,22 +64,22 @@ class MyComponent extends Block {
       },
       profileMethod(e: Event) {
         e.preventDefault();
+        window.history.pushState({}, '', `${window.location.origin}/profile`);
+        renderDOM(new ProfilePage());
+      },
+      editPasswordMethod(e: Event) {
+        e.preventDefault();
         window.history.pushState(
           {},
           '',
-          `${window.location.origin}/user/profile`
+          `${window.location.origin}/edit-password`
         );
-        renderDOM(new ProfilePage());
+        renderDOM(new EditPasswordPage());
       },
       // userPageMethod(e: Event) {
       //   e.preventDefault();
       //   window.history.pushState({}, '', `${window.location.origin}/user`);
       //   renderDOM(new UserPage());
-      // },
-      // editPasswordMethod(e: Event) {
-      //   e.preventDefault();
-      //   window.history.pushState({}, '', `${window.location.origin}/edit-password`);
-      //   renderDOM(new EditPasswordPage());
       // },
       // chatPageMethod(e: Event) {
       //   e.preventDefault();
@@ -85,10 +89,8 @@ class MyComponent extends Block {
     };
   }
 
-  // <li><a href="./profile.hbs">Профиль</a></li>
   // <li><a href="./chat.hbs">Чат</a></li>
   // <li><a href="./changeProfile.hbs">Изменить данные</a></li>
-  // <li><a href="./changeProfilePassword.hbs">Изменить пароль</a></li>
 
   render() {
     return `
@@ -126,6 +128,13 @@ class MyComponent extends Block {
             type='button'
             text="Профиль"
             onClick=profileMethod
+          }}}
+        </li>
+        <li>
+          {{{Button
+            type='button'
+            text="Изменить пароль"
+            onClick=editPasswordMethod
           }}}
         </li>
       </ul>
