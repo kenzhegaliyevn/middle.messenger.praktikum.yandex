@@ -26,7 +26,7 @@
 
 .btn-back {
   @include absCenter;
-  background-image: url('../asserts/back.svg');
+  background-image: url("../asserts/back.svg");
   width: 2.8rem;
   height: 2.8rem;
   cursor: pointer;

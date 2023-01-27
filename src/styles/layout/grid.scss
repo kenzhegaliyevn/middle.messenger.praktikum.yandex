@@ -8,7 +8,7 @@
 
   @include clearfix;
 
-  [class^='col-'] {
+  [class^="col-"] {
     float: left;
     &:not(:last-child) {
       margin-right: $gutter-horizontal;

@@ -35,7 +35,7 @@
       color: $color-grey;
       &::after {
         padding-left: 0.8rem;
-        content: url('../asserts/arrow-right.svg');
+        content: url("../asserts/arrow-right.svg");
       }
     }
   }
@@ -52,7 +52,7 @@
       font-weight: $font-weight;
       font-size: 1.2rem;
       line-height: 1.2rem;
-      background-image: url('../asserts/search.svg');
+      background-image: url("../asserts/search.svg");
       background-repeat: no-repeat;
       background-position: 5% center;
       color: $color-grey;
