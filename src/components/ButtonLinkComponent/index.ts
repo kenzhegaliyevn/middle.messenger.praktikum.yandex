@@ -14,6 +14,6 @@ export default class ButtonLink extends Block {
   }
 
   render(): string {
-    return `<a href='' class='btn--link ${this.props.className}'>{{text}}</a>`;
+    return `<a href='' class='btn-link ${this.props.className}'>{{text}}</a>`;
   }
 }
