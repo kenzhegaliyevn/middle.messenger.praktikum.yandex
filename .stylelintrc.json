@@ -1,7 +1,6 @@
 {
-  "extends": "stylelint-config-standard",
-  "rules": {
-    "selector-class-pattern": ""
-  },
-  "ignoreFiles": ["./dist/*.css"]
+  "extends": [
+    "stylelint-config-standard-scss",
+    "stylelint-config-prettier-scss"
+  ]
 }
