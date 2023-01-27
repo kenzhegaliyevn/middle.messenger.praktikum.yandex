@@ -1,23 +1,23 @@
 import { Block, renderDOM, registerComponent } from './core';
 // components
-import StatusContainer from './components/StatusContainer';
-import FormContainer from './components/FormContainer';
-import Button from './components/Button';
-import ButtonLink from './components/ButtonLink';
-import SignUpFormContainer from './components/SignUpFormContainer';
-import Input from './components/Input';
-import ButtonBack from './components/ButtonBack';
-import ProfileFormContainer from './components/ProfileFormContainer';
+import StatusContainer from './components/StatusContainerComponent';
+import FormContainer from './components/FormContainerComponent';
+import Button from './components/ButtonComponent';
+import ButtonLink from './components/ButtonLinkComponent';
+import SignUpFormContainer from './components/SignUpFormContainerComponent';
+import Input from './components/InputComponent';
+import ButtonBack from './components/ButtonBackComponent';
+import ProfileFormContainer from './components/ProfileFormContainerComponent';
 
 // pages
-import NotFoundPage from './pages/NotFound';
-import ErrorPage from './pages/Error';
-import SignInPage from './pages/SignIn';
-import SignUpPage from './pages/SignUp';
-import ProfilePage from './pages/Profile';
-import EditPasswordPage from './pages/EditPassword';
-import ChangeProfilePage from './pages/ChangeProfile';
-import ChatPage from './pages/Chat';
+import NotFoundPage from './pages/NotFoundPage';
+import ErrorPage from './pages/ErrorPage';
+import SignInPage from './pages/SignInPage';
+import SignUpPage from './pages/SignUpPage';
+import ProfilePage from './pages/ProfilePage';
+import EditPasswordPage from './pages/EditPasswordPage';
+import ChangeProfilePage from './pages/ChangeProfilePage';
+import ChatPage from './pages/ChatPage';
 
 import './styles/style.scss';
 
