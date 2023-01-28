@@ -14,18 +14,18 @@ export default class FormContainer extends Block {
 
   handleBlur() {
     const error = this.props.error as string;
-    const { loginInput, passwordInput } = this.refs;
-    const inputLoginElement = loginInput.children[0] as HTMLInputElement;
-    const inputPasswordElement = passwordInput.children[0] as HTMLInputElement;
-    if (
-      error === '' &&
-      inputLoginElement.value === '' &&
-      inputPasswordElement.value === ''
-    ) {
-      this.setProps({
-        ...this.props,
-        error: 'Введите логин и пароль',
-      });
+    const items: { [key: string]: HTMLInputElement } = {};
+
+    for (const [key, value] of Object.entries(this.refs)) {
+      items[key] = value.children[1] as HTMLInputElement;
+    }
+    for (const [key, value] of Object.entries(items)) {
+      if (this.props.error === '' && value.value === '') {
+        this.setProps({
+          ...this.props,
+          error: 'Заполните поля',
+        });
+      }
     }
   }
 
@@ -60,17 +60,24 @@ export default class FormContainer extends Block {
         <div class='form-container'>
           <h2 class='form-container__header'>{{data.header}}</h2>
           <form class='form-container__form'>
-            {{#each data.fields}}
-              {{{ Input
-                  id=fieldName
-                  fieldName=fieldName
-                  fieldType=fieldType
-                  fieldLabel=fieldLabel
-                  ref=ref
-                  onFocus=onFocus
-                  onBlur=onBlur
-              }}}
-            {{/each}}
+            {{{ Input
+                id="login"
+                fieldName="login"
+                fieldType="text"
+                fieldLabel="Логин"
+                ref="loginInput"
+                onFocus=onFocus
+                onBlur=onBlur
+            }}}
+            {{{ Input
+              id="password"
+              fieldName="password"
+              fieldType="password"
+              fieldLabel="Пароль"
+              ref="passwordInput"
+              onFocus=onFocus
+              onBlur=onBlur
+            }}}
             <p>${this.props.error}</p>
             {{{ Button text=data.button.text className='u-margin-top-big' onClick=onClick}}}
           </form>

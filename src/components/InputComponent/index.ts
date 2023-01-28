@@ -36,20 +36,26 @@ class Input extends Block {
       value,
       error
     });
+    console.log(onBlur);
   }
 
   protected render(): string {
     return `
       <div class="field">
-        <label for="${this.props.fieldName}" class='field__label'>${this.props.fieldLabel}</label>
+        <label for={{fieldName}} class='field__label'>{{fieldLabel}}</label>
         <input
           id={{fieldName}}
           type={{fieldType}}
           name={{fieldName}}
           class=field__input
+          {{#if value}}
+          value={{value}}
+          {{else}}
+          value=""
+          {{/if}}  
         />
         {{#if error}}
-          <p>${this.props.error}</p>
+          <p>{{error}}</p>
         {{/if}}  
       </div>
     `;
