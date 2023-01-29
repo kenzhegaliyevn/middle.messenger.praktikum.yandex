@@ -36,7 +36,6 @@ class Input extends Block {
       value,
       error
     });
-    console.log(onBlur);
   }
 
   protected render(): string {
