@@ -5,11 +5,15 @@
   "engines": {
     "node": ">12.0"
   },
-  "browserslist": "> 0.5%, last 2 versions, not dead",
+  "targets": {
+    "default": {
+      "context": "browser"
+    }
+  },
   "scripts": {
-    "dev": "parcel src/index.html --no-cache --open --port=3000",
-    "start": "parcel build src/index.html && node server.js",
-    "build": "parcel build ./src/index.html",
+    "dev": "parcel ./src/index.html --target default --no-cache --open --port=3000",
+    "start": "parcel build ./src/index.html --no-cache --target default && node server.js",
+    "build": "parcel build ./src/index.html --no-cache --target default",
     "lint": "eslint"
   },
   "keywords": [],
