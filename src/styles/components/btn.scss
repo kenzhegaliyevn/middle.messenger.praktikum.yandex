@@ -7,33 +7,36 @@
   border-radius: 0.8rem;
 }
 
-.btn--link {
+.btn-link {
   font-weight: $font-weight;
   font-size: 1.1rem;
   line-height: 1.1rem;
   color: $color-blue;
   text-decoration: none;
+
   &:hover {
     text-decoration: underline;
   }
 }
 
-.btn--primary {
+.btn-primary {
   background-color: $color-blue;
   color: $color-white;
   cursor: pointer;
 }
 
 .btn-back {
-  @include absCenter;
-  background-image: url('../asserts/back.svg');
+  @include abs-center;
+
+  background-image: url("../asserts/back.svg");
   width: 2.8rem;
   height: 2.8rem;
   cursor: pointer;
+
   &-wrapper {
     position: fixed;
-    top: 0px;
-    left: 0px;
+    top: 0;
+    left: 0;
     width: 6.4rem;
     height: 100%;
     background-color: $color-grey-light2;

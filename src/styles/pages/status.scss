@@ -1,20 +1,25 @@
 .status-container-wrapper {
-  @include fullPageScreen;
+  @include full-page-screen;
 }
 
 .status-container {
-  @include absCenter;
-  @include absInnerCenter;
+  @include abs-center;
+  @include abs-inner-center;
+
   flex-direction: column;
+
   &__code {
     font-weight: $font-weight;
     font-size: 4rem;
     line-height: 4rem;
   }
+
   &__text {
     margin-top: 2rem;
+
     @include h2;
   }
+
   &__link {
     margin-top: 6.9rem;
   }

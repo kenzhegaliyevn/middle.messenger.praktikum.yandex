@@ -1,25 +1,25 @@
 @mixin clearfix {
   &::after {
-    content: '';
+    content: "";
     display: table;
     clear: both;
   }
 }
 
-@mixin absCenter {
+@mixin abs-center {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
 
-@mixin absInnerCenter {
+@mixin abs-inner-center {
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-@mixin fullPageScreen {
+@mixin full-page-screen {
   height: 100vh;
   background-color: $color-white;
 }

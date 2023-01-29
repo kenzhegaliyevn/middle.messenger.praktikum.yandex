@@ -9,8 +9,18 @@ html {
 }
 
 body {
-  font-family: 'Inter', sans-serif;
+  font-family: Inter, sans-serif;
   font-weight: 400;
   font-size: 1.6rem;
   color: #1e1e1e;
+}
+
+.ul-wrapper {
+  li {
+    margin-top: 1.2rem;
+
+    button {
+      width: 15rem;
+    }
+  }
 }
