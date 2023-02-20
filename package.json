@@ -16,6 +16,14 @@
     "build": "parcel build ./src/index.html --no-cache --target default",
     "lint": "eslint"
   },
+  "alias": {
+    "core": "./src/core",
+    "components": "./src/components",
+    "pages": "./src/pages",
+    "utils": "./src/utils",
+    "api": "./src/api",
+    "services": "./src/services"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
