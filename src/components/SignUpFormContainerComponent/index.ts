@@ -6,6 +6,17 @@ import {
   validatePassword,
   validatePhone,
 } from "../../utils/validation";
+import { store } from "core/store";
+import { signUp } from "services/login";
+
+export type TError = {
+  email?: string;
+  login?: string;
+  first_name?: string;
+  second_name?: string;
+  phone?: string;
+  password?: string;
+};
 
 export type TValues = {
   email: string;
@@ -19,7 +30,16 @@ export type TState = {
   values: TValues;
 };
 
-export default class SignUpFormContainer extends Block {
+export interface SignUpFormProps {
+  error?: TError | null;
+  onClick?: (e: Event) => void;
+  onFocus?: (e: Event) => void;
+  onBlur?: (e: Event) => void;
+  onChange?: (e: Event) => void;
+  values?: TValues;
+}
+
+export default class SignUpFormContainer extends Block<SignUpFormProps> {
   static componentName = "SignUpFormContainer";
 
   state: TState = {
@@ -72,18 +92,33 @@ export default class SignUpFormContainer extends Block {
 
   handleRegister(e: Event) {
     e.preventDefault();
+
+    const inputValues = Object.values(this.refs).reduce(
+      (acc: { [key: string]: string }, curr: HTMLElement) => {
+        const input = curr.querySelector("input") as HTMLInputElement;
+        if (!input) {
+          return { ...acc };
+        }
+        return {
+          ...acc,
+          [input.name]: input.value,
+        };
+      },
+      {}
+    );
+
     const items: { [key: string]: HTMLInputElement } = {};
 
     for (const [key, value] of Object.entries(this.refs)) {
       items[key] = value.children[1] as HTMLInputElement;
     }
 
-    if (this.props.error !== "") {
-      this.setProps({
-        ...this.props,
-        error: "",
-      });
-    }
+    // if (this.props.error !== "") {
+    //   this.setProps({
+    //     ...this.props,
+    //     error: "",
+    //   });
+    // }
 
     let validatedEmail;
     let validatedLogin;
@@ -128,13 +163,24 @@ export default class SignUpFormContainer extends Block {
         },
       });
     }
+    const allValid: boolean = [
+      validatedEmail,
+      validatedLogin,
+      validatedName,
+      validatedSecondName,
+      validatedPhone,
+      validatedPassword,
+    ].every((val: any) => val === "");
+
+    if (allValid) {
+      console.log("inputValues", inputValues);
+
+      store.dispatch(signUp, inputValues);
+    }
   }
 
   render() {
     return `
-      <div class='form-container-wrapper'>
-        <div class='form-container'>
-          <h2 class='form-container__header'>Регистрация</h2>
           <form class='form-container__form'>
             {{{ Input
               id="email"
@@ -205,9 +251,6 @@ export default class SignUpFormContainer extends Block {
             }}}
             {{{ Button text="Зарегистрироваться" className='u-margin-top-big' onClick=onClick}}}
           </form>
-          {{{ ButtonLink text="Войти" className='form-container__link'}}}
-        </div>
-      </div>
     `;
   }
 }
