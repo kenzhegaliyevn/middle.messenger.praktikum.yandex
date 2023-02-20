@@ -1,4 +1,4 @@
-import Block from '../../core/Block';
+import Block from '../../core/block/Block';
 
 export default class FormContainer extends Block {
   static componentName = 'FormContainer';

@@ -4,7 +4,7 @@ import {
   validateLogin,
   validatePhone,
 } from "../../utils/validation";
-import Block from "../../core/Block";
+import Block from "../../core/block/Block";
 import userTestData from "./constants";
 import { TUserData } from "./types";
 

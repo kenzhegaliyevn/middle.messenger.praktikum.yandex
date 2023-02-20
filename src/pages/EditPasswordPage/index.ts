@@ -1,4 +1,4 @@
-import Block from '../../core/Block';
+import Block from '../../core/block/Block';
 
 export default class EditPasswordPage extends Block {
   static componentName = 'EditPasswordPage';

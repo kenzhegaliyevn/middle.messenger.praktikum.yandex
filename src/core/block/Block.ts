@@ -1,6 +1,7 @@
-import EventBus from "./EventBus";
+import EventBus from "../EventBus";
 import { v4 as uuid_v4 } from "uuid";
 import Handlebars from "handlebars";
+import { Values, Nullable } from "../types";
 
 interface BlockMeta<P = any> {
   props: P;
