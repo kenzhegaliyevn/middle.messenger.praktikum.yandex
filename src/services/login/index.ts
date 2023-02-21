@@ -1,5 +1,10 @@
 import signInApi from "api/signin";
-import { RegistrationRequestData } from "api/signin/types";
+import {
+  LoginRequestData,
+  RegistrationRequestData,
+  UserInfoResponse,
+} from "api/signin/types";
+import { APIError } from "api/types";
 import appRouter from "core/router";
 import { AppState, Dispatch } from "core/store/types";
 
@@ -14,20 +19,22 @@ export const initApp = async (
     },
   });
   try {
-    const response = await signInApi.user();
-    console.log(response, "=> response user");
-    if (response?.reason) {
-      dispatch({
-        user: {
-          ...state.user,
-          error: true,
-          errorReason: response.reason,
-        },
-      });
-      return;
-    }
+    const response = (await signInApi.user()) as UserInfoResponse;
+    dispatch({
+      user: {
+        ...state.user,
+        data: response,
+      },
+    });
   } catch (error) {
     console.error(error);
+    dispatch({
+      user: {
+        ...state.user,
+        error: true,
+        errorReason: "Пользователь неавторизован",
+      },
+    });
   } finally {
     dispatch({
       app: {
@@ -41,7 +48,7 @@ export const initApp = async (
 export const signUp = async (
   dispatch: Dispatch<AppState>,
   state: AppState,
-  action: RegistrationRequestData
+  requestData: RegistrationRequestData
 ) => {
   dispatch({
     registration: {
@@ -49,19 +56,78 @@ export const signUp = async (
       loading: true,
     },
   });
-  const response = await signInApi.signUp(action);
-
-  console.log(response, "=> response");
-
-  if (response?.reason) {
+  try {
+    await signInApi.signUp(requestData);
+    appRouter.go("/profile");
+  } catch (error) {
+    const errorResponse = error as APIError;
     dispatch({
-      registration: {
+      login: {
         ...state.registration,
         error: true,
-        errorReason: response.reason,
+        errorReason: errorResponse.reason,
       },
     });
-    return;
   }
-  appRouter.go("/login");
 };
+
+export const singIn = async (
+  dispatch: Dispatch<AppState>,
+  state: AppState,
+  requestData: LoginRequestData
+) => {
+  dispatch({
+    login: {
+      ...state.login,
+      loading: true,
+    },
+  });
+  try {
+    await signInApi.login(requestData);
+    const userResponse = (await signInApi.user()) as UserInfoResponse;
+    dispatch({
+      user: {
+        ...state.user,
+        data: userResponse,
+      },
+    });
+    appRouter.go("/chats");
+  } catch (error) {
+    const responseError = error as APIError;
+    dispatch({
+      login: {
+        ...state.login,
+        error: true,
+        errorReason: responseError.reason,
+      },
+    });
+  }
+};
+
+// export const logOutAction = async (
+//   dispatch: Dispatch<AppState>,
+//   state: AppState
+// ) => {
+//   dispatch({
+//     login: {
+//       ...state.login,
+//       loading: true,
+//     },
+//   });
+//   try {
+//     await signInApi.logout();
+//     dispatch({
+//       login: {
+//         ...state.login,
+//         loading: false,
+//       },
+//       user: {
+//         ...state.user,
+//         data: null,
+//       },
+//     });
+//     appRouter.go("/login");
+//   } catch (error) {
+//     console.error(error);
+//   }
+// };

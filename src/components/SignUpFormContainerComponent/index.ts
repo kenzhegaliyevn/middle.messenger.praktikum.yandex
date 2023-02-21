@@ -173,8 +173,6 @@ export default class SignUpFormContainer extends Block<SignUpFormProps> {
     ].every((val: any) => val === "");
 
     if (allValid) {
-      console.log("inputValues", inputValues);
-
       store.dispatch(signUp, inputValues);
     }
   }

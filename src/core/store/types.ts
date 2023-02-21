@@ -1,4 +1,8 @@
-import { Screens } from "../router/constants";
+import { UserInfoResponse } from "api/signin/types";
+import { Screens } from "core/router/constants";
+// import { TGetChatResponse } from "api/chat/types";
+// import { TUserByIdResponse } from "api/user/types";
+// import { TChatMessageItem } from "services/chat/types";
 
 export type Dispatch<State> = (
   nextStateOrAction: Partial<State> | Action<State>,
@@ -17,24 +21,37 @@ export type TApp = {
 };
 
 export type TUser = {
-  data: any;
+  data: UserInfoResponse | null;
   error: boolean;
   loading: boolean;
   errorReason?: string;
 };
 
-export type TChats = {
-  data: any;
+// export type TChats = {
+//   data: TGetChatResponse[];
+//   error: boolean;
+//   loading: boolean;
+//   errorReason?: string;
+//   currentChat: number | null;
+// };
+
+export type TCreateChat = {
   error: boolean;
   loading: boolean;
   errorReason?: string;
 };
 
-export type AppState = {
-  app: TApp;
-  user: TUser;
-  chats: TChats;
-  registration: TRegistartionState;
+export type TDeleteChat = {
+  error: boolean;
+  loading: boolean;
+  errorReason?: string;
+};
+
+export type TSearchUserState = {
+  error: boolean;
+  loading: boolean;
+  errorReason?: string;
+  data: UserInfoResponse[] | null;
 };
 
 export type TRegistartionState = {
@@ -42,3 +59,28 @@ export type TRegistartionState = {
   error: boolean;
   errorReason?: string;
 };
+
+export type TLoginState = {
+  loading: boolean;
+  error: boolean;
+  errorReason?: string;
+};
+
+export type AppState = {
+  app: TApp;
+  user: TUser;
+  // chats: TChats;
+  registration: TRegistartionState;
+  login: TLoginState;
+  createChat: TCreateChat;
+  deleteChat: TDeleteChat;
+  searchUser: TSearchUserState;
+  // messages: TChatMessageItem[];
+  // chatUsers: TChatUsers;
+};
+
+// export type TChatUsers = {
+//   loading: boolean;
+//   data: TUserByIdResponse[];
+//   error: boolean;
+// };

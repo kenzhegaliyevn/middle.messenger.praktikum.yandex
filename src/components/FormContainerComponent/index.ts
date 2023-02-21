@@ -1,3 +1,5 @@
+import { store } from "core/store";
+import { singIn } from "services/login";
 import Block from "../../core/block/Block";
 
 export default class FormContainer extends Block {
@@ -32,6 +34,7 @@ export default class FormContainer extends Block {
   handleAuth(e: Event) {
     e.preventDefault();
     const items: { [key: string]: HTMLInputElement } = {};
+    const data = {};
 
     for (const [key, value] of Object.entries(this.refs)) {
       items[key] = value.children[1] as HTMLInputElement;
@@ -52,6 +55,14 @@ export default class FormContainer extends Block {
         });
       }
     }
+
+    if (this.props.error !== "") {
+      return;
+    }
+    store.dispatch(singIn, {
+      login: items.loginInput.value,
+      password: items.passwordInput.value,
+    });
   }
 
   render() {

@@ -1,4 +1,4 @@
-import METHODS from './constants';
+import METHODS from "./constants";
 
 export type THeaders = {
   [key: string]: string;
@@ -11,8 +11,8 @@ export type TData = {
 export type TOptions = {
   headers?: THeaders;
   method?: METHODS;
-  data?: TData;
-  timeout?: number
+  data?: TData | string | FormData;
+  timeout?: number;
 };
 
 export type HTTPMethod = <T>(url: string, options?: TOptions) => Promise<T>;
