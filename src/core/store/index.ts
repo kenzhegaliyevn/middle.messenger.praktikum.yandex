@@ -18,9 +18,7 @@ class Store<State extends Record<string, any>> extends EventBus {
 
   public set(nextState: Partial<State>) {
     const prevState = { ...this.state };
-
     this.state = { ...this.state, ...nextState };
-
     this.emit("changed", prevState, nextState);
   }
 

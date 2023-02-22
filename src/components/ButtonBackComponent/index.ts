@@ -1,14 +1,20 @@
-import { Block } from '../../core';
+import appRouter from "core/router";
+import { Block } from "../../core";
+import { ButtonBackProps } from "./types";
 
-interface ButtonBackProps {
-  onClick: () => void;
-}
+export default class ButtonBack extends Block<ButtonBackProps> {
+  static componentName = "ButtonBack";
 
-export default class ButtonBack extends Block {
-  static componentName = 'ButtonBack';
+  constructor(props: ButtonBackProps) {
+    super({
+      ...props,
+      events: { click: (e: Event) => this.handleGoBack(e) },
+    });
+  }
 
-  constructor({ onClick }: ButtonBackProps) {
-    super({ events: { click: onClick } });
+  handleGoBack(e: Event) {
+    e.preventDefault();
+    appRouter.back();
   }
 
   render() {

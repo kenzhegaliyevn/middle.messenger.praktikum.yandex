@@ -1,10 +1,43 @@
-import Block from '../../core/block/Block';
+import Block from "../../core/block/Block";
+import { ChatPageProps } from "./types";
+import appRouter from "core/router";
 
-export default class ChatPage extends Block {
-  static componentName = 'ChatPage';
+class ChatPage extends Block<ChatPageProps> {
+  static componentName = "ChatPage";
 
-  constructor() {
-    super();
+  constructor(props: ChatPageProps) {
+    super(props);
+    this.setProps({
+      ...props,
+      onProfileGo: (e: Event) => this.handleGoToProfilePage(e),
+      // onChatCreate: () => this.handleCreateChat(),
+      // renderChats: () => {
+      //   const chats = selectChats();
+      //   const currentChat = selectCurrentChat();
+      //   return (
+      //     chats &&
+      //     chats.map((chat) => ({
+      //       id: chat.id,
+      //       title: chat.title,
+      //       avatar: chat.avatar,
+      //       last_message: chat.last_message,
+      //       unread_count: chat.unread_count,
+      //       activeClassName: () =>
+      //         currentChat === chat.id ? "active_chat" : "",
+      //       onClick: () => {
+      //         store.dispatch({ messages: [] });
+      //         closeAllSockets();
+      //         store.dispatch(selectChat, chat.id);
+      //       },
+      //     }))
+      //   );
+      // },
+    });
+  }
+
+  handleGoToProfilePage(e: Event) {
+    e.preventDefault();
+    appRouter.go("/profile");
   }
 
   render(): string {
@@ -15,7 +48,11 @@ export default class ChatPage extends Block {
             <div class='col-1-of-3'>
               <div class='chat-list-wrapper'>
                 <div class='chat-list__header'>
-                  <a href='' class='chat-list__header__btn'>Профиль</a>
+                  {{{ Link
+                    text="Профиль >"
+                    className="chat_page_left_profile_link"
+                    onClick=onProfileGo
+                  }}}  
                 </div>
                 <div class='chat-list__search-wrapper'>
                   <input type='text' placeholder='Поиск' />
@@ -46,3 +83,5 @@ export default class ChatPage extends Block {
     `;
   }
 }
+
+export default ChatPage;

@@ -104,30 +104,30 @@ export const singIn = async (
   }
 };
 
-// export const logOutAction = async (
-//   dispatch: Dispatch<AppState>,
-//   state: AppState
-// ) => {
-//   dispatch({
-//     login: {
-//       ...state.login,
-//       loading: true,
-//     },
-//   });
-//   try {
-//     await signInApi.logout();
-//     dispatch({
-//       login: {
-//         ...state.login,
-//         loading: false,
-//       },
-//       user: {
-//         ...state.user,
-//         data: null,
-//       },
-//     });
-//     appRouter.go("/login");
-//   } catch (error) {
-//     console.error(error);
-//   }
-// };
+export const logOutAction = async (
+  dispatch: Dispatch<AppState>,
+  state: AppState
+) => {
+  dispatch({
+    login: {
+      ...state.login,
+      loading: true,
+    },
+  });
+  try {
+    await signInApi.logout();
+    dispatch({
+      login: {
+        ...state.login,
+        loading: false,
+      },
+      user: {
+        ...state.user,
+        data: null,
+      },
+    });
+    appRouter.go("/login");
+  } catch (error) {
+    console.error(error);
+  }
+};

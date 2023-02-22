@@ -1,7 +1,26 @@
-import Block from '../../core/block/Block';
+import { store } from "core/store";
+import { logOutAction } from "services/login";
+import Block from "../../core/block/Block";
+import { UserPageProps } from "./types";
 
-export default class ProfilePage extends Block {
-  static componentName = 'ProfilePage';
+export default class ProfilePage extends Block<UserPageProps> {
+  static componentName = "ProfilePage";
+
+  constructor(props: UserPageProps) {
+    super({
+      ...props,
+      editableAvatar: true,
+      //   onEditDataPage: (e: Event) => this.handleGoToEditDataPage(e),
+      //   onEditPasswordPage: (e: Event) => this.handleGoToEditPasswordPage(e),
+      //   onChat: (e: Event) => this.handleGoToChat(e),
+      onLogout: (e: Event) => this.handleLogout(e),
+    });
+  }
+
+  handleLogout(e: Event) {
+    e.preventDefault();
+    store.dispatch(logOutAction);
+  }
 
   render(): string {
     return `
@@ -48,7 +67,7 @@ export default class ProfilePage extends Block {
                     <a class='profile-container__settings--blue'>Изменить пароль</a>
                 </div>
                 <div class='profile-container__settings'>
-                    <a class='profile-container__settings--red'>Выйти</a>
+                    {{{ Link text="Выйти" onClick=onLogout  }}}
                 </div>
             </div>
         </div>

@@ -13,6 +13,7 @@ import SignUpFormContainer from "./components/SignUpFormContainerComponent";
 import Input from "./components/InputComponent";
 import ButtonBack from "./components/ButtonBackComponent";
 import ProfileFormContainer from "./components/ProfileFormContainerComponent";
+import { Link } from "./components/Link";
 
 // pages
 import NotFoundPage from "./pages/NotFoundPage";
@@ -35,6 +36,7 @@ registerComponent(ButtonLink);
 registerComponent(Input);
 registerComponent(ButtonBack);
 registerComponent(ProfileFormContainer);
+registerComponent(Link);
 
 // pages
 registerComponent(NotFoundPage);
@@ -50,128 +52,3 @@ document.addEventListener("DOMContentLoaded", () => {
   initRouter(appRouter, store);
   store.dispatch(initApp);
 });
-
-// class MyComponent extends Block {
-//   static componentName: 'MyComponent';
-
-//   protected getStateFromProps(): void {
-//     this.state = {
-//       notFoundMethod(e: Event) {
-//         e.preventDefault();
-//         window.history.pushState({}, '', `${window.location.origin}/404`);
-//         renderDOM(new NotFoundPage());
-//       },
-//       errorPageMethod(e: Event) {
-//         e.preventDefault();
-//         window.history.pushState({}, '', `${window.location.origin}/500`);
-//         renderDOM(new ErrorPage());
-//       },
-//       signInPageMethod(e: Event) {
-//         e.preventDefault();
-//         window.history.pushState({}, '', `${window.location.origin}/signin`);
-//         renderDOM(new SignInPage());
-//       },
-//       signUpPageMethod(e: Event) {
-//         e.preventDefault();
-//         window.history.pushState({}, '', `${window.location.origin}/signup`);
-//         renderDOM(new SignUpPage());
-//       },
-//       profileMethod(e: Event) {
-//         e.preventDefault();
-//         window.history.pushState({}, '', `${window.location.origin}/profile`);
-//         renderDOM(new ProfilePage());
-//       },
-//       editPasswordMethod(e: Event) {
-//         e.preventDefault();
-//         window.history.pushState(
-//           {},
-//           '',
-//           `${window.location.origin}/edit-password`
-//         );
-//         renderDOM(new EditPasswordPage());
-//       },
-//       changeProfilePageMethod(e: Event) {
-//         e.preventDefault();
-//         window.history.pushState(
-//           {},
-//           '',
-//           `${window.location.origin}/change-profile`
-//         );
-//         renderDOM(new ChangeProfilePage());
-//       },
-//       chatPageMethod(e: Event) {
-//         e.preventDefault();
-//         window.history.pushState({}, '', `${window.location.origin}/chat`);
-//         renderDOM(new ChatPage());
-//       },
-//     };
-//   }
-
-//   render() {
-//     return `
-//       <nav>
-//         <ul class="ul-wrapper">
-//           <li>
-//             {{{Button
-//               type='button'
-//               text="Авторизация"
-//               onClick=signInPageMethod
-//             }}}
-//           </li>
-//           <li>
-//             {{{Button
-//               type='button'
-//               text="Регистрация"
-//               onClick=signUpPageMethod
-//             }}}
-//           </li>
-//           <li>
-//             {{{Button
-//               type='button'
-//               text="404"
-//               onClick=notFoundMethod
-//             }}}
-//           </li>
-//           <li>
-//             {{{Button
-//               type='button'
-//               text="500"
-//               onClick=errorPageMethod
-//             }}}
-//           </li>
-//           <li>
-//             {{{Button
-//               type='button'
-//               text="Профиль"
-//               onClick=profileMethod
-//             }}}
-//           </li>
-//           <li>
-//             {{{Button
-//               type='button'
-//               text="Изменить пароль"
-//               onClick=editPasswordMethod
-//             }}}
-//           </li>
-//           <li>
-//             {{{Button
-//               type='button'
-//               text="Изменить данные"
-//               onClick=changeProfilePageMethod
-//             }}}
-//           </li>
-//           <li>
-//             {{{Button
-//               type='button'
-//               text="Чат"
-//               onClick=chatPageMethod
-//             }}}
-//           </li>
-//         </ul>
-//       </nav>
-//     `;
-//   }
-// }
-// document.addEventListener('DOMContentLoaded', () => {
-//   renderDOM(new MyComponent());
-// });

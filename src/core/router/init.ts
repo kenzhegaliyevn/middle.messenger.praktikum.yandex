@@ -9,6 +9,10 @@ export function initRouter(router: typeof Router, store: Store<AppState>) {
     router.use(route.path, () => {
       const isAuthorized = Boolean(store.getState().user.data);
       const currentScreen = Boolean(store.getState().app.screen);
+      console.log({
+        isAuthorized,
+        currentScreen,
+      });
 
       if (isAuthorized || !route.shouldAuthorized) {
         store.dispatch({
@@ -30,10 +34,6 @@ export function initRouter(router: typeof Router, store: Store<AppState>) {
     });
   });
 
-  /**
-   * Глобальный слушатель изменений в сторе
-   * для переключения активного экрана
-   */
   store.on("changed", (prevState, nextState) => {
     if (!prevState.app.appIsInited && nextState.app.appIsInited) {
       router.start();
