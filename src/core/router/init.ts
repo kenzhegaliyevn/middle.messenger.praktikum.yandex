@@ -9,11 +9,6 @@ export function initRouter(router: typeof Router, store: Store<AppState>) {
     router.use(route.path, () => {
       const isAuthorized = Boolean(store.getState().user.data);
       const currentScreen = Boolean(store.getState().app.screen);
-      console.log({
-        isAuthorized,
-        currentScreen,
-      });
-
       if (isAuthorized || !route.shouldAuthorized) {
         store.dispatch({
           app: {

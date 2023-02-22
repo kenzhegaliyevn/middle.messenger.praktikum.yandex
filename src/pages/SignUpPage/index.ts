@@ -2,27 +2,28 @@ import Block from "../../core/block/Block";
 import { CoreRouter } from "core/router/types";
 import withRouter from "utils/HOCS/withRouter";
 import { store } from "core/store";
+import appRouter from "core/router";
 
 type SignUpPageProps = {
-  router: CoreRouter;
   onClick?: (e: Event) => void;
+  error?: boolean;
+  errorReason?: string;
+  loading?: boolean;
 };
 
 class SignUpPage extends Block<SignUpPageProps> {
   static componentName = "SignUpPage";
 
   constructor(props: SignUpPageProps) {
-    super(props);
-
-    this.setProps({
-      ...this.props,
+    super({
+      ...props,
       onClick: (e: Event) => this.goToSignin(e),
     });
   }
 
   goToSignin(e: Event) {
     e.preventDefault();
-    this.props.router.go("/signin");
+    appRouter.go("/signin");
   }
 
   render(): string {
@@ -40,4 +41,5 @@ class SignUpPage extends Block<SignUpPageProps> {
   }
 }
 
-export default withRouter(SignUpPage);
+// export default withRouter(SignUpPage);
+export default SignUpPage;
