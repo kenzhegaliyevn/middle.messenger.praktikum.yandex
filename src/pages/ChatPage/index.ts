@@ -10,7 +10,7 @@ class ChatPage extends Block<ChatPageProps> {
     this.setProps({
       ...props,
       onProfileGo: (e: Event) => this.handleGoToProfilePage(e),
-      // onChatCreate: () => this.handleCreateChat(),
+      onChatCreate: () => this.handleCreateChat(),
       // renderChats: () => {
       //   const chats = selectChats();
       //   const currentChat = selectCurrentChat();
@@ -40,13 +40,26 @@ class ChatPage extends Block<ChatPageProps> {
     appRouter.go("/profile");
   }
 
+  handleCreateChat() {
+    const { createChatRef } = this.refs;
+    console.log(this.refs);
+    // createChatRef.setProps({ isShow: true });
+  }
+
   render(): string {
     return `
       <div class='container'>
+        {{{ CreateChatModal
+            isShow=isShow
+            ref="createChatRef"
+        }}}
         <div class='chat-wrapper'>
           <div class='row'>
             <div class='col-1-of-3'>
               <div class='chat-list-wrapper'>
+                <div class="chat_page_left_create">
+                  {{{ Button type="button" text="Создать чат" onClick=onChatCreate }}}
+                </div>
                 <div class='chat-list__header'>
                   {{{ Link
                     text="Профиль >"
@@ -72,9 +85,6 @@ class ChatPage extends Block<ChatPageProps> {
             </div>
             <div class='col-2-of-3'>
               <div class='content-wrapper'>
-                <p class='content__text'>
-                  Выберите чат чтобы отправить сообщение
-                </p>
               </div>
             </div>
           </div>
@@ -83,5 +93,10 @@ class ChatPage extends Block<ChatPageProps> {
     `;
   }
 }
+// {{#if currentChat }}
+//   {{{ ChatArea currentChatId="${currentChat}" }}}
+// {{else}}
+//   {{{ EmptyChat }}}
+// {{/if}}
 
 export default ChatPage;
