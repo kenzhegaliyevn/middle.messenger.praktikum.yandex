@@ -3,9 +3,7 @@ export type LoginRequestData = {
   password: string;
 };
 
-export type LoginResponseData = {
-
-};
+export type LoginResponseData = {};
 
 export type RegistrationRequestData = {
   first_name: string;
@@ -21,12 +19,12 @@ export type RegistrationResponseData = {
 };
 
 export type UserInfoResponse = {
+  avatar: string | null;
+  display_name: string | null;
+  email: string | null;
+  first_name: string | null;
   id: number;
-  first_name: string;
-  second_name: string;
-  display_name: string;
-  login: string;
-  email: string;
-  phone: string;
-  avatar: string;
+  login: string | null;
+  phone: string | null;
+  second_name: string | null;
 };

@@ -1,8 +1,8 @@
 import { UserInfoResponse } from "api/signin/types";
 import { Screens } from "core/router/constants";
 import { TGetChatResponse } from "api/chat/types";
-// import { TUserByIdResponse } from "api/user/types";
-// import { TChatMessageItem } from "services/chat/types";
+import { TUserByIdResponse } from "api/user/types";
+import { TChatMessageItem } from "services/chat/types";
 
 export type Dispatch<State> = (
   nextStateOrAction: Partial<State> | Action<State>,
@@ -75,12 +75,12 @@ export type AppState = {
   createChat: TCreateChat;
   deleteChat: TDeleteChat;
   searchUser: TSearchUserState;
-  // messages: TChatMessageItem[];
-  // chatUsers: TChatUsers;
+  messages: TChatMessageItem[];
+  chatUsers: TChatUsers;
 };
 
-// export type TChatUsers = {
-//   loading: boolean;
-//   data: TUserByIdResponse[];
-//   error: boolean;
-// };
+export type TChatUsers = {
+  loading: boolean;
+  data: TUserByIdResponse[];
+  error: boolean;
+};

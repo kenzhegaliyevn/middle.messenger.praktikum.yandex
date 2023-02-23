@@ -49,3 +49,17 @@ export const validateMessage = (text: string): string => {
   }
   return "";
 };
+
+export const validateFactory = (
+  name: string,
+  value: string,
+  extra?: Record<string, unknown>
+) => {
+  if (name === "email") return validateEmail(value);
+  if (name === "login") return validateLogin(value);
+  if (name === "first_name") return validateFirstName(value);
+  if (name === "second_name") return validateFirstName(value);
+  if (name === "phone") return validatePhone(value);
+  if (name === "password") return validatePassword(value);
+  return null;
+};

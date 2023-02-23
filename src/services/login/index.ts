@@ -1,4 +1,4 @@
-import signInApi from "api/signin";
+import signInApi from "../../api/signin";
 import {
   LoginRequestData,
   RegistrationRequestData,

@@ -19,10 +19,7 @@ const signInApi = {
       data: JSON.stringify(data),
     }),
   logout: () => appHTTP.post("/auth/logout"),
-  user: (): Promise<UserInfoResponse | APIError> =>
-    appHTTP.get("/auth/user", {
-      headers: { "Content-Type": "application/json" },
-    }),
+  user: (): Promise<UserInfoResponse | APIError> => appHTTP.get("/auth/user"),
 };
 
 export default signInApi;
