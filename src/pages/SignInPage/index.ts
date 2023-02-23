@@ -1,5 +1,7 @@
 import Block from "../../core/block/Block";
 import appRouter from "core/router";
+import { AppState } from "core/store/types";
+import connectStore from "utils/HOCS/connectStore";
 
 type SignInPageProps = {
   onClick?: (e: Event) => void;
@@ -7,7 +9,7 @@ type SignInPageProps = {
   errorReason?: string;
   loading?: boolean;
 };
-class SignInPage extends Block<SignInPageProps> {
+class SignInPageComponent extends Block<SignInPageProps> {
   static componentName = "SignInPage";
 
   constructor(props: SignInPageProps) {
@@ -56,5 +58,19 @@ class SignInPage extends Block<SignInPageProps> {
     `;
   }
 }
+
+const mapStateToProps = (state: AppState) => {
+  console.log(state);
+
+  return {};
+};
+// const mapStateToProps = (state: AppState) => ({
+//   error: state.login.error,
+//   errorReason: state.login.errorReason,
+//   loading: state.login.loading,
+// });
+
+const withStore = connectStore(mapStateToProps);
+const SignInPage = withStore(SignInPageComponent);
 
 export default SignInPage;

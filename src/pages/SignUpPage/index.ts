@@ -1,7 +1,4 @@
 import Block from "../../core/block/Block";
-import { CoreRouter } from "core/router/types";
-import withRouter from "utils/HOCS/withRouter";
-import { store } from "core/store";
 import appRouter from "core/router";
 
 type SignUpPageProps = {
@@ -41,5 +38,4 @@ class SignUpPage extends Block<SignUpPageProps> {
   }
 }
 
-// export default withRouter(SignUpPage);
 export default SignUpPage;

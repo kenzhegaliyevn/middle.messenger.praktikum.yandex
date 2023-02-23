@@ -1,70 +1,58 @@
-import EventBus from "../EventBus";
 import { v4 as uuid_v4 } from "uuid";
 import Handlebars from "handlebars";
-import { Values, Nullable } from "../types";
-
-interface BlockMeta<P = any> {
-  props: P;
-}
+import EventBus from "../EventBus";
+import { Values } from "../types";
+import isEqual from "utils/mydash/isEqual";
+import cloneDeep from "utils/mydash/cloneDeep";
 
 type Events = Values<typeof Block.EVENTS>;
 
-export default class Block<P = any> {
+type TRefs = { [key: string]: Block };
+
+export type BlockConstructable<Props = any> = {
+  componentName: string;
+  new (props: Props): Block;
+};
+
+class Block<P extends object = {}> {
   static EVENTS = {
     INIT: "init",
     FLOW_CDM: "flow:component-did-mount",
     FLOW_CDU: "flow:component-did-update",
     FLOW_RENDER: "flow:render",
   } as const;
+  static componentName: string;
 
   public id = uuid_v4();
-  private readonly _meta: BlockMeta;
-
-  protected _element: Nullable<HTMLElement> = null;
-  protected readonly props: P;
-  protected children: { [id: string]: Block } = {};
+  public node: Nullable<HTMLElement> = null;
+  public props: P;
+  public children: { [id: string]: Block } = {};
+  protected state: object = {};
+  public refs: TRefs = {};
 
   eventBus: () => EventBus<Events>;
 
-  protected state: any = {};
-  protected refs: { [key: string]: HTMLElement } = {};
-
   public constructor(props?: P) {
     const eventBus = new EventBus<Events>();
-
-    this._meta = {
-      props,
-    };
-
-    this.getStateFromProps(props);
-
     this.props = this._makePropsProxy(props || ({} as P));
-    this.state = this._makePropsProxy(this.state);
-
     this.eventBus = () => eventBus;
-
-    this._registerEvents(eventBus);
-
+    this.registerEvents(eventBus);
     eventBus.emit(Block.EVENTS.INIT, this.props);
   }
 
-  _registerEvents(eventBus: EventBus<Events>) {
+  private registerEvents(eventBus: EventBus<Events>) {
     eventBus.on(Block.EVENTS.INIT, this.init.bind(this));
     eventBus.on(Block.EVENTS.FLOW_CDM, this._componentDidMount.bind(this));
     eventBus.on(Block.EVENTS.FLOW_CDU, this._componentDidUpdate.bind(this));
     eventBus.on(Block.EVENTS.FLOW_RENDER, this._render.bind(this));
   }
 
-  _createResources() {
-    this._element = this._createDocumentElement("div");
-  }
-
-  protected getStateFromProps(props: any): void {
-    this.state = {};
+  private createResources() {
+    this.node = this.createDocumentElement("div");
   }
 
   init() {
-    this._createResources();
+    this.createResources();
     this.eventBus().emit(Block.EVENTS.FLOW_RENDER, this.props);
   }
 
@@ -72,7 +60,7 @@ export default class Block<P = any> {
     this.componentDidMount(props);
   }
 
-  componentDidMount(props: P) {}
+  componentDidMount(_props: P) {}
 
   _componentDidUpdate(oldProps: P, newProps: P) {
     const response = this.componentDidUpdate(oldProps, newProps);
@@ -82,8 +70,11 @@ export default class Block<P = any> {
     this._render();
   }
 
-  componentDidUpdate(oldProps: P, newProps: P) {
-    return true;
+  componentDidUpdate(_oldProps: P, _newProps: P) {
+    if (!isEqual(_oldProps, _newProps)) {
+      return true;
+    }
+    return false;
   }
 
   setProps = (nextProps: P) => {
@@ -94,27 +85,16 @@ export default class Block<P = any> {
     Object.assign(this.props, nextProps);
   };
 
-  setState = (nextState: any) => {
-    if (!nextState) {
-      return;
-    }
-
-    Object.assign(this.state, nextState);
-  };
-
   get element() {
-    return this._element;
+    return this.node;
   }
 
   _render() {
     const fragment = this._compile();
-
     this._removeEvents();
     const newElement = fragment.firstElementChild!;
-
-    this._element!.replaceWith(newElement);
-
-    this._element = newElement as HTMLElement;
+    this.node!.replaceWith(newElement);
+    this.node = newElement as HTMLElement;
     this._addEvents();
   }
 
@@ -138,21 +118,16 @@ export default class Block<P = any> {
   }
 
   _makePropsProxy(props: any): any {
-    // Можно и так передать this
-    // Такой способ больше не применяется с приходом ES6+
-    const self = this;
-
     return new Proxy(props as unknown as object, {
-      get(target: Record<string, unknown>, prop: string) {
+      get: (target: Record<string, unknown>, prop: string) => {
         const value = target[prop];
         return typeof value === "function" ? value.bind(target) : value;
       },
-      set(target: Record<string, unknown>, prop: string, value: unknown) {
+      set: (target: Record<string, unknown>, prop: string, value: unknown) => {
+        const prevProps = cloneDeep(target);
         target[prop] = value;
-
-        // Запускаем обновление компоненты
-        // Плохой cloneDeep, в след итерации нужно заставлять добавлять cloneDeep им самим
-        self.eventBus().emit(Block.EVENTS.FLOW_CDU, { ...target }, target);
+        const nextProps = cloneDeep(target);
+        this.eventBus().emit(Block.EVENTS.FLOW_CDU, prevProps, nextProps);
         return true;
       },
       deleteProperty() {
@@ -161,19 +136,19 @@ export default class Block<P = any> {
     }) as unknown as P;
   }
 
-  _createDocumentElement(tagName: string) {
+  private createDocumentElement(tagName: string) {
     return document.createElement(tagName);
   }
 
   _removeEvents() {
     const events: Record<string, () => void> = (this.props as any).events;
 
-    if (!events || !this._element) {
+    if (!events || !this.node) {
       return;
     }
 
     Object.entries(events).forEach(([event, listener]) => {
-      this._element!.removeEventListener(event, listener);
+      this.node!.removeEventListener(event, listener);
     });
   }
 
@@ -185,19 +160,14 @@ export default class Block<P = any> {
     }
 
     Object.entries(events).forEach(([event, listener]) => {
-      this._element!.addEventListener(event, listener);
+      this.node!.addEventListener(event, listener);
     });
   }
 
   _compile(): DocumentFragment {
     const fragment = document.createElement("template");
-
-    /**
-     * Рендерим шаблон
-     */
     const template = Handlebars.compile(this.render());
     fragment.innerHTML = template({
-      ...this.state,
       ...this.props,
       children: this.children,
       refs: this.refs,
@@ -239,12 +209,5 @@ export default class Block<P = any> {
      */
     return fragment.content;
   }
-
-  show() {
-    this.getContent().style.display = "block";
-  }
-
-  hide() {
-    this.getContent().style.display = "none";
-  }
 }
+export default Block;

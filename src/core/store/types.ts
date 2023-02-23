@@ -1,6 +1,6 @@
 import { UserInfoResponse } from "api/signin/types";
 import { Screens } from "core/router/constants";
-// import { TGetChatResponse } from "api/chat/types";
+import { TGetChatResponse } from "api/chat/types";
 // import { TUserByIdResponse } from "api/user/types";
 // import { TChatMessageItem } from "services/chat/types";
 
@@ -27,13 +27,13 @@ export type TUser = {
   errorReason?: string;
 };
 
-// export type TChats = {
-//   data: TGetChatResponse[];
-//   error: boolean;
-//   loading: boolean;
-//   errorReason?: string;
-//   currentChat: number | null;
-// };
+export type TChats = {
+  data: TGetChatResponse[];
+  error: boolean;
+  loading: boolean;
+  errorReason?: string;
+  currentChat: number | null;
+};
 
 export type TCreateChat = {
   error: boolean;
@@ -69,7 +69,7 @@ export type TLoginState = {
 export type AppState = {
   app: TApp;
   user: TUser;
-  // chats: TChats;
+  chats: TChats;
   registration: TRegistartionState;
   login: TLoginState;
   createChat: TCreateChat;

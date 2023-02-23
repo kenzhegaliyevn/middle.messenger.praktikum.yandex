@@ -1,3 +1,4 @@
+import appRouter from "core/router";
 import { store } from "core/store";
 import { logOutAction } from "services/login";
 import Block from "../../core/block/Block";
@@ -10,16 +11,26 @@ export default class ProfilePage extends Block<UserPageProps> {
     super({
       ...props,
       editableAvatar: true,
-      //   onEditDataPage: (e: Event) => this.handleGoToEditDataPage(e),
-      //   onEditPasswordPage: (e: Event) => this.handleGoToEditPasswordPage(e),
-      //   onChat: (e: Event) => this.handleGoToChat(e),
+      onEditDataPage: (e: Event) => this.handleGoToEditPage(e),
       onLogout: (e: Event) => this.handleLogout(e),
+      onEditPasswordPage: (e: Event) => this.handleGoToEditPasswordPage(e),
+      //   onChat: (e: Event) => this.handleGoToChat(e),
     });
+  }
+
+  handleGoToEditPage(e: Event) {
+    e.preventDefault();
+    appRouter.go("/edit/profile");
   }
 
   handleLogout(e: Event) {
     e.preventDefault();
     store.dispatch(logOutAction);
+  }
+
+  handleGoToEditPasswordPage(e: Event) {
+    e.preventDefault();
+    appRouter.go("/edit/password");
   }
 
   render(): string {
@@ -61,10 +72,10 @@ export default class ProfilePage extends Block<UserPageProps> {
                     <span name="phone">+7 (909) 967 30 30</span>
                 </div>
                 <div class='profile-container__settings'>
-                    <a class='profile-container__settings--blue'>Изменить данные</a>
+                    {{{ Link text="Изменить данные" onClick=onEditDataPage }}}
                 </div>
                 <div class='profile-container__settings'>
-                    <a class='profile-container__settings--blue'>Изменить пароль</a>
+                    {{{ Link text="Изменить пароль" onClick=onEditPasswordPage  }}}
                 </div>
                 <div class='profile-container__settings'>
                     {{{ Link text="Выйти" onClick=onLogout  }}}
