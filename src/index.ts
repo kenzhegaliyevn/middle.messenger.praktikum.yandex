@@ -13,6 +13,7 @@ import SignUpFormContainer from "./components/SignUpFormContainerComponent";
 import Input from "./components/InputComponent";
 import ButtonBack from "./components/ButtonBackComponent";
 import ProfileFormContainer from "./components/ProfileFormContainerComponent";
+import EditPasswordFormContainer from "./components/EditPasswordFormContainerComponent";
 import { Link } from "./components/Link";
 
 // pages
@@ -37,6 +38,7 @@ registerComponent(Input);
 registerComponent(ButtonBack);
 registerComponent(ProfileFormContainer);
 registerComponent(Link);
+registerComponent(EditPasswordFormContainer);
 
 // pages
 registerComponent(NotFoundPage);

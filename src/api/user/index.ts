@@ -16,12 +16,12 @@ const userApi = {
   ): Promise<TChangeProfileResponse | APIError> =>
     appHTTP.put("/user/profile", {
       data: JSON.stringify(data),
-      // headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json" },
     }),
   changePassword: (data: TChangePasswordRequest): Promise<APIError> =>
-    appHTTP.put("user/password", {
+    appHTTP.put("/user/password", {
       data: JSON.stringify(data),
-      // headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json" },
     }),
   getUser: (id: number): Promise<TUserByIdResponse | APIError> =>
     appHTTP.get(`/user/${id}`),

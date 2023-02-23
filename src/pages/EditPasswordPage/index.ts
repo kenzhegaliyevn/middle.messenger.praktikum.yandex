@@ -1,12 +1,12 @@
-import Block from '../../core/block/Block';
+import Block from "../../core/block/Block";
 
 export default class EditPasswordPage extends Block {
-  static componentName = 'EditPasswordPage';
+  static componentName = "EditPasswordPage";
 
   render(): string {
     return `
       <div class='container'>
-        {{{ ProfileFormContainer data='{
+        {{{ EditPasswordFormContainer data='{
             "fields": [
               {
                 "fieldLabel": "Старый пароль",

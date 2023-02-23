@@ -1,12 +1,5 @@
-import {
-  validateEmail,
-  validateFactory,
-  validateFirstName,
-  validateLogin,
-  validatePhone,
-} from "../../utils/validation";
+import { validateFactory } from "../../utils/validation";
 import Block from "../../core/block/Block";
-import userTestData from "./constants";
 import { AppState } from "core/store/types";
 import { EditUserPageProps } from "./types";
 import { store } from "core/store";
@@ -28,16 +21,6 @@ class ProfileFormContainerComponent extends Block<EditUserPageProps> {
       file: null,
       error: {},
     });
-
-    // super();
-    // this.setProps({
-    //   editableAvatar: true,
-    //   userData: userTestData,
-    //   onBlur: this.handleBlur.bind(this),
-    //   error: null,
-    //   onClick: (e: Event) => this.handleEdit(e),
-    //   onChange: (e: Event) => this.handleChange(e),
-    // });
   }
 
   private getValuesAndNames() {
@@ -87,34 +70,6 @@ class ProfileFormContainerComponent extends Block<EditUserPageProps> {
   //       },
   //     });
   //   }
-  // }
-
-  // handleChange(e: Event) {
-  //   const target = e.target as HTMLInputElement;
-  //   this.state = {
-  //     ...this.state,
-  //     values: {
-  //       ...this.state.values,
-  //       [target.name]: target.value,
-  //     },
-  //   };
-  // }
-
-  // handleEdit(e: Event) {
-  //   e.preventDefault();
-  //   const inputValues = Object.values(this.refs).map((val) => {
-  //     const input = val.querySelector("input") as HTMLInputElement;
-  //     if (input) {
-  //       return {
-  //         [input.name]: input.value,
-  //       };
-  //     }
-  //     return {
-  //       noValue: "",
-  //     };
-  //   });
-
-  //   console.log(inputValues);
   // }
 
   render() {
