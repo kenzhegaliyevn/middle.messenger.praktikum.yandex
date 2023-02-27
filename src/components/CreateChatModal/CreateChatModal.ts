@@ -25,7 +25,7 @@ export class CreateChatModal extends Block<CreateChatModalProps> {
     return `
     {{#if ${isShow}}}
       <div class="overlay">
-      <div class="modal_container">
+      <div class="modal-container">
         <div class="modal_container_header">
           <h2>Название чата</h2>
           {{{ CloseButton
