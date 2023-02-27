@@ -10,7 +10,7 @@ import {
   TUserByIdResponse,
 } from "./types";
 
-const userApi = {
+export const userApi = {
   changeProfile: (
     data: TChangeProfileRequest
   ): Promise<TChangeProfileResponse | APIError> =>
@@ -30,12 +30,9 @@ const userApi = {
   ): Promise<TSearchUserResponse | APIError> =>
     appHTTP.post("/user/search", {
       data: JSON.stringify(data),
-      // headers: { "Content-Type": "application/json" },
     }),
   changeAvatar: (
     data: TChangeAvatarRequest
   ): Promise<TChangeProfileResponse | APIError> =>
     appHTTP.put("/user/profile/avatar", { data }),
 };
-
-export default userApi;

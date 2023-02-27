@@ -1,9 +1,6 @@
 import Block from "core/block/Block";
-import { store } from "core/store";
-// import { deleteChatAction } from 'services/chat/actions';
 import { AppState } from "core/store/types";
 import connectStore from "utils/HOCS/connectStore";
-// import findCurrentChat from 'services/chat/find';
 import { ChatAreaProps } from "./types";
 
 export class ChatAreaClass extends Block<ChatAreaProps> {
@@ -20,7 +17,6 @@ export class ChatAreaClass extends Block<ChatAreaProps> {
 
   handleDeleteChat() {
     const { currentChatId } = this.props;
-    // store.dispatch(deleteChatAction, { chatId: currentChatId });
   }
 
   handleInvitePerson() {
@@ -72,10 +68,6 @@ export class ChatAreaClass extends Block<ChatAreaProps> {
   }
 }
 
-const mapStateToProps = (state: AppState) => ({
-  // messages: state.messages,
-  // currentChatName: findCurrentChat(state.chats.data, state.chats.currentChat as number),
-  // currentChatId: state.chats.currentChat,
-});
+const mapStateToProps = (state: AppState) => ({});
 
 export const ChatArea = connectStore(mapStateToProps)(ChatAreaClass);

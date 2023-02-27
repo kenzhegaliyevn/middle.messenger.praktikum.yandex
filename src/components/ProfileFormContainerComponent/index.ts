@@ -14,10 +14,6 @@ class ProfileFormContainerComponent extends Block<EditUserPageProps> {
     super({
       ...props,
       onDataChange: (e: Event) => this.handleEdit(e),
-      // onAvatarChange: () => this.handleChangeAvatar(),
-      // onOpen: () => this.handleOpenWindow(),
-      // onInput: (e: Event) => this.handleFileInputChange(e),
-      // onChange: (e: Event) => this.handleTextInputChange(e),
       file: null,
       error: {},
     });
@@ -55,22 +51,6 @@ class ProfileFormContainerComponent extends Block<EditUserPageProps> {
       })
       .every((val) => val === "");
   }
-
-  // handleBlur() {
-  //   if (this.props.error === null) {
-  //     this.setProps({
-  //       ...this.props,
-  //       error: {
-  //         email: validateEmail(""),
-  //         login: validateLogin(""),
-  //         first_name: validateFirstName(""),
-  //         second_name: validateFirstName(""),
-  //         phone: validatePhone(""),
-  //         display_name: validateFirstName(""),
-  //       },
-  //     });
-  //   }
-  // }
 
   render() {
     const { userData } = this.props;
@@ -176,7 +156,6 @@ const mapStateToProps = (state: AppState) => ({
   loading: state.user.loading,
 });
 
-// @ts-ignore
 const ProfileFormContainer = connectStore(mapStateToProps)(
   ProfileFormContainerComponent
 );

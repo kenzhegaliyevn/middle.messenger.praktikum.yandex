@@ -1,16 +1,8 @@
-import {
-  validateEmail,
-  validateFactory,
-  validateFirstName,
-  validateLogin,
-  validatePhone,
-} from "../../utils/validation";
 import Block from "../../core/block/Block";
-import userTestData from "./constants";
 import { AppState } from "core/store/types";
 import { EditPasswordPageProps } from "./types";
 import { store } from "core/store";
-import { changeUserDataAction, changeUserPasswordAction } from "services/user";
+import { changeUserPasswordAction } from "services/user";
 import connectStore from "utils/HOCS/connectStore";
 import { UserInfoResponse } from "api/signin/types";
 
@@ -114,7 +106,6 @@ const mapStateToProps = (state: AppState) => ({
   userData: state.user.data as UserInfoResponse,
 });
 
-// @ts-ignore
 const EditPasswordFormContainer = connectStore(mapStateToProps)(
   EditPasswordFormContainerComponent
 );

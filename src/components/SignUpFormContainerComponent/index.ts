@@ -113,13 +113,6 @@ export default class SignUpFormContainer extends Block<SignUpFormProps> {
       items[key] = value.children[1] as HTMLInputElement;
     }
 
-    // if (this.props.error !== "") {
-    //   this.setProps({
-    //     ...this.props,
-    //     error: "",
-    //   });
-    // }
-
     let validatedEmail;
     let validatedLogin;
     let validatedName;

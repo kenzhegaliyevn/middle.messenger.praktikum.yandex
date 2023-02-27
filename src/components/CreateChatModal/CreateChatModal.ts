@@ -1,6 +1,4 @@
 import Block from "core/block/Block";
-import { store } from "core/store";
-// import { createChatAction } from 'services/chat/actions';
 import { CreateChatModalProps } from "./types";
 
 export class CreateChatModal extends Block<CreateChatModalProps> {
@@ -16,16 +14,7 @@ export class CreateChatModal extends Block<CreateChatModalProps> {
     });
   }
 
-  handleCreateChat() {
-    // const { chatName, error } = this.refs;
-    // const input = chatName.node?.querySelector('input')!;
-    // if (input.value === '') {
-    //   error.setProps({ error: 'Имя не может быть пустым' });
-    //   return;
-    // }
-    // store.dispatch(createChatAction, { title: input.value });
-    // this.handleCloseModal();
-  }
+  handleCreateChat() {}
 
   handleCloseModal() {
     this.setProps({ ...this.props, isShow: false });
@@ -61,8 +50,6 @@ export class CreateChatModal extends Block<CreateChatModalProps> {
         </div>
       </div>
       </div>
-      {{else}}
-      <div></div>
       {{/if}}
     `;
   }
