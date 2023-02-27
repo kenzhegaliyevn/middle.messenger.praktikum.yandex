@@ -26,15 +26,15 @@ export class CreateChatModal extends Block<CreateChatModalProps> {
     {{#if ${isShow}}}
       <div class="overlay">
       <div class="modal-container">
-        <div class="modal_container_header">
+        <div class="modal-container_header">
           <h2>Название чата</h2>
           {{{ CloseButton
-              className="modal_container_btn_close"
+              className="modal-container_btn_close"
               text="x"
               onClick=onCloseModal
           }}}
         </div>
-        <div class="modal_container_body">
+        <div class="modal-container_body">
         {{{ Input
             type="text"
             placeholder="Чат"
@@ -45,7 +45,7 @@ export class CreateChatModal extends Block<CreateChatModalProps> {
             ref="error"
         }}}
         </div>
-        <div class="modal_container_footer">
+        <div class="modal-container_footer">
           {{{ Button textBtn="Ок" onClick=onCreate }}}
         </div>
       </div>
