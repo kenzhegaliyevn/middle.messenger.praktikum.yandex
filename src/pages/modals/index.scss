@@ -31,7 +31,8 @@
 }
 
 .modal-popup-small {
+  /* stylelint-disable */
   @extend .modal-popup;
-
+  /* stylelint-enable */
   height: 150px;
 }

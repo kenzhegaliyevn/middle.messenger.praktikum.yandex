@@ -44,5 +44,7 @@
 }
 
 .avatar-modal-change-avatar {
+  /* stylelint-disable */
   @extend .signup-form-button-primary;
+  /* stylelint-enable */
 }

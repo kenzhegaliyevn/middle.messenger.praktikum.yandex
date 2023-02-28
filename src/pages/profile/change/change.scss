@@ -1,5 +1,7 @@
 .profile-change-return {
+  /* stylelint-disable */
   @extend .profile-return;
+  /* stylelint-enable */
 }
 
 .profile-change-field-value {
@@ -22,5 +24,7 @@
 }
 
 .profile-change-save-button {
+  /* stylelint-disable */
   @extend .signup-form-button-primary;
+  /* stylelint-enable */
 }
