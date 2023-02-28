@@ -1,32 +1,24 @@
 {
-    "extends": ["airbnb-typescript"],
-    "parser": "@typescript-eslint/parser",
-    "plugins": ["@typescript-eslint","import"],
-    "parserOptions": {
-      "project": "./tsconfig.json"
-    },    
-    "rules": {
-      "max-len": [2, 110],
-      "no-undef": "off",
-      "@typescript-eslint/no-unused-vars": "off",
-      "@typescript-eslint/default-param-last": "off",
-      "import/prefer-default-export": "off",
-      "react/jsx-filename-extension": [0],
-      "import/extensions": [
-        "error",
-        "ignorePackages",
-        {
-          "js": "never",
-          "ts": "never"
-        }
-     ]
-    },
-    "settings": {
-        "import/resolver": {
-          "node": {
-            "extensions": [".js", ".ts"],
-            "moduleDirectory": ["node_modules", "src/"]
-          }
-        }
-    }
-} 
+  "root": true,
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "project": ["./tsconfig.json"]
+  },
+  "plugins": [
+    "@typescript-eslint"
+  ],
+  "extends": [
+    "airbnb",
+    "airbnb-typescript"
+  ],
+  "rules": {
+    "no-param-reassign": 0,
+    "linebreak-style": 0,
+    "@typescript-eslint/no-explicit-any": ["error", { "ignoreRestArgs": false }],
+    "prefer-destructuring": ["error", {"object": true, "array": false}],
+    "no-console": "off",
+    "class-methods-use-this": "off",
+    "no-plusplus": "off"
+  },
+  "ignorePatterns": ["src/core/"]
+}
