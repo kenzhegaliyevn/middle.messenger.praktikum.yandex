@@ -4,8 +4,8 @@
   "description": "",
   "scripts": {
     "dev": "rm -rf dist/* && parcel src/*.html --no-cache --no-source-maps --port=3000",
-    "build": "parcel build src/*.html --target app --dist-dir dist --public-url ./ --no-source-maps --no-cache --no-optimize",
     "start": "npm run build && node server.ts",
+    "build": "parcel build ./src/index.html --no-cache --target default",
     "eslint": "eslint . --ext .ts,.js",
     "eslint:fix": "eslint . --ext .ts,.js --fix",
     "test": "mocha -r ts-node/register"
