@@ -2,7 +2,7 @@ export { Button } from './button';
 export { Input } from './input';
 export { Label } from './label';
 export { ChatInfo } from './chat-info';
-export { Link } from './mylink';
+export { Link } from './link';
 export { Avatar } from './avatar';
 export { ErrorMessage } from './error-message';
 export { Image } from './image';
