@@ -7,7 +7,8 @@
     "build": "parcel build src/*.html --target app --dist-dir dist --public-url ./ --no-source-maps --no-cache --no-optimize",
     "start": "npm run build && node server.ts",
     "eslint": "eslint . --ext .ts,.js",
-    "eslint:fix": "eslint . --ext .ts,.js --fix"
+    "eslint:fix": "eslint . --ext .ts,.js --fix",
+    "test": "mocha -r ts-node/register"
   },
   "engines": {
     "node": ">=12"
