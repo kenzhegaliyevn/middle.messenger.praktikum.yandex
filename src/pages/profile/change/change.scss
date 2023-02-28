@@ -1,0 +1,27 @@
+.profile-change-return {
+    @extend .profile-return;
+}
+
+
+.profile-change-field-value {
+    flex-grow: 1;
+    flex-shrink: 1;
+
+    font-family: $font-family;
+    font-style: normal;
+    font-size: 13px;
+    line-height: 13px;
+    text-align: right;
+    color: #999999;
+    border: 0;
+    width: 100%;
+    padding: 0 0 0 20px;
+    margin-bottom: 0px;
+    &:focus {
+        outline: none;
+    }
+}
+
+.profile-change-save-button {
+    @extend .signup-form-button-primary;
+}

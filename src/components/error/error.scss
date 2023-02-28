@@ -1,0 +1,29 @@
+@import '../../vars.scss';
+
+
+.error-container {
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.error-header {
+    font-family: $font-family;
+    font-style: normal;
+    font-size: 40px;
+    line-height: 40px;
+    text-align: center;
+    margin: 20px;
+    
+    color: #1E1E1E;
+}
+.error-text {
+    font-family: $font-family;
+    font-style: normal;
+    font-size: 20px;
+    line-height: 20px;
+    text-align: center;
+    
+    color: #1E1E1E;
+}

@@ -1,0 +1,54 @@
+<div class="{{ styles.profile-container }}">
+    <div class={{ styles.profile-return }}>
+        <div class={{ styles.arrow-button-container }}>
+            {{{ linkProfileReturn }}}
+        </div>
+    </div>
+
+    <div class={{ styles.profile-info-container }}>
+        <div class={{ styles.profile-info }}>
+            <div>
+                {{{ changeAvatar }}}
+            </div>
+            <div class={{ styles.profile-display-name }}>{{ user.display_name }}</div>
+            <div class={{ styles.profile-info-fields-container }}>
+                <div class={{ styles.profile-info-field }}>
+                    <div class={{ styles.profile-info-field-name }}>Почта</div>
+                    <div class={{ styles.profile-info-field-value }}>{{ user.email }}</div>
+                </div>
+                <div class={{ styles.profile-info-field }}>
+                    <div class={{ styles.profile-info-field-name }}>Логин</div>
+                    <div class={{ styles.profile-info-field-value }}>{{ user.login }}</div>
+                </div>
+                <div class={{ styles.profile-info-field }}>
+                    <div class={{ styles.profile-info-field-name }}>Имя</div>
+                    <div class={{ styles.profile-info-field-value }}>{{ user.first_name }}</div>
+                </div>
+                <div class={{ styles.profile-info-field }}>
+                    <div class={{ styles.profile-info-field-name }}>Фамилия</div>
+                    <div class={{ styles.profile-info-field-value }}>{{ user.second_name }}</div>
+                </div>
+                <div class={{ styles.profile-info-field }}>
+                    <div class={{ styles.profile-info-field-name }}>Имя в чате</div>
+                    <div class={{ styles.profile-info-field-value }}>{{ user.display_name }}</div>
+                </div>
+                <div class={{ styles.profile-info-field }}>
+                    <div class={{ styles.profile-info-field-name }}>Телефон</div>
+                    <div class={{ styles.profile-info-field-value }}>{{ user.phone }}</div>
+                </div>
+            </div>
+
+
+            <div class={{ styles.profile-info-link }}>
+                {{{ linkChangeInfo }}}
+            </div>
+            <div class={{ styles.profile-info-link }}>
+                {{{ linkChangePassword }}}
+            </div>
+            <div class={{ styles.profile-info-link }}>
+                {{{ linkExit }}}
+            </div>
+
+        </div>
+    </div>
+</div>

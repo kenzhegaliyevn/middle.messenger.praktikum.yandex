@@ -1,0 +1,28 @@
+{{#if isMessage}}    
+<div
+{{#if self}}
+class={{ styles.conversation-self-message }}
+{{else}}
+class={{ styles.conversation-other-message }}
+{{/if}}
+>
+        {{#if file}}
+        {{ file }}
+        {{/if}}
+        {{#if text}}
+        {{ text }}
+        {{/if}}
+        {{#if self}}
+        <div class={{ styles.conversation-self-message-status }}>
+            {{#if isRead}}
+            <img src={{ icons.status-read }}>
+            {{/if}}
+        <time class={{ styles.conversation-self-message-time }}>{{ time }}</time>
+        </div>
+        {{else}}
+        <div class={{ styles.conversation-other-message-time }}>{{ time }}</div>
+        {{/if}}
+    </div>
+{{else}}
+    <div class={{ styles.conversation-date }}>{{ date }}</div>
+{{/if}}

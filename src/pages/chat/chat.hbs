@@ -1,0 +1,18 @@
+<div class={{ styles.chat-container }}>
+    <div class={{ styles.chat-left-container }}>
+        <div class="{{ styles.profile-link-container }}">{{{ linkProfileOpen }}}</div>
+        <div class="{{ styles.search-container }}">
+            {{{ inputSearch }}}
+            <div class={{ styles.search-container-placeholder }}>
+                <img class={{ styles.search-icon }} src={{ icons.search }}> Поиск
+            </div>
+        </div>
+        <div class="{{ styles.chat-infos-container }}">
+            {{{ chatInfos }}}
+            {{{ linkAddChat }}}
+        </div>
+    </div>
+    <div id="conversation" class={{ styles.chat-right-container }}>
+        <p class={{ styles.chat-stub }}>Выберите чат чтобы отправить сообщение</p>
+    </div>
+</div>

@@ -1,0 +1,16 @@
+.button {
+    font-family: $font-family;
+    font-style: normal;
+    font-size: 13px;
+    line-height: 13px;
+    text-align: center;
+    width: 280px;
+    height: 37px;
+    border-width: 0px;
+    margin: auto;
+    cursor: pointer;
+}
+
+.button-primary-loading {    
+    color: $primary-background-hover;
+}
