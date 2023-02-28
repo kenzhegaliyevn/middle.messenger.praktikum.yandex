@@ -7,7 +7,6 @@
   display: flex;
   flex-grow: 0;
   flex-shrink: 0;
-
   width: 64px;
   background-color: #fbfbfb;
   border-right: 1px solid #eaeaea;
@@ -28,7 +27,6 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-
   flex-basis: 510px;
   margin: auto;
 }
@@ -55,22 +53,20 @@
   right: 0;
   margin: 0;
   border-radius: 50%;
-  background: rgba(29, 106, 154, 0.72);
+  background: rgb(29 106 154 / 72%);
   visibility: hidden;
   opacity: 0;
-
   transition: opacity 0.2s, visibility 0.2s;
 }
 
 .profile-change-avatar-text {
   margin: auto;
-
   font-family: $font-family;
   font-style: normal;
   font-size: 13px;
   line-height: 14px;
   text-align: center;
-  color: #ffffff;
+  color: #fff;
 }
 
 .profile-avatar-wrapper:hover .profile-change-avatar-container {
@@ -80,7 +76,6 @@
 
 .profile-display-name {
   margin: 20px;
-
   font-family: $font-family;
   font-style: normal;
   font-weight: 600;
@@ -88,6 +83,7 @@
   line-height: 16px;
   color: #1e1e1e;
 }
+
 .profile-info-fields-container {
   width: 100%;
   padding: 20px 0;
@@ -98,8 +94,9 @@
   align-items: stretch;
   width: 100%;
   box-sizing: border-box;
-  padding: 10px 0 10px 0;
+  padding: 10px 0;
   border-bottom: 1px solid #eaeaea;
+
   &:last-of-type {
     border: 0;
   }
@@ -117,24 +114,25 @@
 .profile-info-field-value {
   flex-grow: 1;
   flex-shrink: 1;
-
   font-family: $font-family;
   font-style: normal;
   font-size: 13px;
   line-height: 13px;
   text-align: right;
-  color: #999999;
+  color: #999;
 }
 
 .profile-info-link {
   width: 100%;
   box-sizing: border-box;
-  padding: 10px 0 10px 0;
+  padding: 10px 0;
   border-bottom: 1px solid #eaeaea;
+
   &:last-of-type {
     border: 0;
   }
 }
+
 .profile-info-link-change-info {
   font-family: $font-family;
   font-style: normal;
@@ -142,6 +140,7 @@
   line-height: 13px;
   color: #3369f3;
 }
+
 .profile-info-link-change-password {
   font-family: $font-family;
   font-style: normal;
@@ -149,12 +148,13 @@
   line-height: 13px;
   color: #3369f3;
 }
+
 .profile-info-link-exit {
   font-family: $font-family;
   font-style: normal;
   font-size: 13px;
   line-height: 13px;
-  color: #ff0000;
+  color: #f00;
 }
 
 .form-profile-spacer {
