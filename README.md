@@ -2,8 +2,19 @@
 Веб месенджер
 ---
 ## Описание
+Проект в рамках курса Мидл Фронтенд Разработчик от [Яндекс.Практикум](https://practicum.yandex.ru/) - веб-мессенджер с функциями регистрации, авторизации, создания чатов, перепиской, изменениями пользовательских данных.
 
-Статическая верстка страниц.
+## Технологии
+
+- html
+- css
+- typescript
+- шаблонизатор handlebars
+- node-сервер express
+- eslint
+- stylelint
+- parcel для сборки проекта
+
 
 [Ссылка на макет Figma](https://www.figma.com/file/jF5fFFzgGOxQeB4CmKWTiE/Chat_external_link?node-id=1%3A658&t=7dT0k24DDxjGk70V-0)
 

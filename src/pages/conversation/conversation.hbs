@@ -1,0 +1,25 @@
+<div class={{ styles.conversation-container }}>
+<div class={{ styles.conversation-header }}>
+    <div class={{ styles.conversation-avatar-container }}>
+        {{{ chatUsers }}}
+    </div>
+    <div class={{ styles.conversation-actions-container}}>
+        {{{ conversationActionsLink }}}
+    </div>
+
+</div>
+<div class={{ styles.conversation-body-container }}>
+    {{{ messages }}}
+</div>
+<div class={{ styles.conversation-footer }}>
+    <div class={{ styles.attach-button-container }}>
+        <img class={{ styles.attach-button }} src={{ icons.paperclip }}>
+    </div>
+    <div class={{ styles.conversation-message-box }}>
+        {{{ inputMessage }}}
+    </div>
+    <div class={{ styles.arrow-button-container }}>
+        {{{ linkSend }}} 
+    </div>
+</div>
+</div>

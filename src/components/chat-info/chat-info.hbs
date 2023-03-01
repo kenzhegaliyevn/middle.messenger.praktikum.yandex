@@ -1,0 +1,13 @@
+<div class={{ styles.chat-info-container }}>
+    <div class={{ styles.chat-info }}>
+        <div class={{ styles.chat-avatar }}><img class={{ styles.avatar-image }} src={{ avatar }}></div>
+        <div class={{ styles.chat-name }}>{{ title }}</div>
+        <time class={{ styles.chat-time }}>{{ time }}</time>
+        <div class={{ styles.chat-last-message }}>{{ text }}</div>
+        {{#if unread_count}}
+        <div class={{ styles.chat-unread-count-container }}>
+            <div class={{ styles.chat-unread-count }}>{{ unread_count }} </div>
+        </div>
+        {{/if}}
+    </div>
+</div>

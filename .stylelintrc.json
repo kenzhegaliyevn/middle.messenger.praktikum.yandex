@@ -1,3 +1,11 @@
 {
-  "extends": "stylelint-config-standard-scss"
+  "extends": ["stylelint-config-standard-scss", "stylelint-config-standard"],
+  "rules": {
+    "color-hex-case": "lower",
+    "scss/at-import-partial-extension": "always",
+    "scss/at-import-partial-extension-blacklist": [""],
+    "at-rule-no-unknown": null,
+    "scss/at-rule-no-unknown": true
+  },
+  "ignoreFiles": ["dist/*"]
 }

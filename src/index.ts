@@ -1,167 +1,179 @@
-import { Block, renderDOM, registerComponent } from './core';
-// components
-import StatusContainer from './components/StatusContainerComponent';
-import FormContainer from './components/FormContainerComponent';
-import Button from './components/ButtonComponent';
-import ButtonLink from './components/ButtonLinkComponent';
-import SignUpFormContainer from './components/SignUpFormContainerComponent';
-import Input from './components/InputComponent';
-import ButtonBack from './components/ButtonBackComponent';
-import ProfileFormContainer from './components/ProfileFormContainerComponent';
+/* eslint-disable max-len */
+import {
+  Login,
+  Signup,
+  Chat,
+  ProfileInfo,
+  ProfileChange,
+  ProfilePassword,
+} from './pages';
 
-// pages
-import NotFoundPage from './pages/NotFoundPage';
-import ErrorPage from './pages/ErrorPage';
-import SignInPage from './pages/SignInPage';
-import SignUpPage from './pages/SignUpPage';
-import ProfilePage from './pages/ProfilePage';
-import EditPasswordPage from './pages/EditPasswordPage';
-import ChangeProfilePage from './pages/ChangeProfilePage';
-import ChatPage from './pages/ChatPage';
+import * as styles from './styles.scss';
+import images from '../static/images/avatar.png';
+import iconsSVG from '../static/icons/*.svg';
+import iconsPNG from '../static/icons/*.png';
+import Router from './utils/services/router';
+import {
+  validateCreateChat,
+  validateLogin,
+  validateSaveInfo,
+  validateSavePassword,
+  validateSignup,
+  validateSendMessage,
+  validateAddChatUser,
+  validateDeleteChatUser,
+} from './utils/validator';
+import GlobalEventBus from './utils/globaleventbus';
+import User from './utils/user';
+import UserController from './utils/controllers/user';
+import ChatController from './utils/controllers/chat';
+import MessagesController from './utils/controllers/messages';
 
-import './styles/style.scss';
+const icons = Object.assign(iconsSVG, iconsPNG);
 
-// components
-registerComponent(StatusContainer);
-registerComponent(FormContainer);
-registerComponent(SignUpFormContainer);
-registerComponent(Button);
-registerComponent(ButtonLink);
-registerComponent(Input);
-registerComponent(ButtonBack);
-registerComponent(ProfileFormContainer);
+const user = new User();
 
-// pages
-registerComponent(NotFoundPage);
-registerComponent(ErrorPage);
-registerComponent(SignInPage);
-registerComponent(SignUpPage);
-registerComponent(ProfilePage);
-registerComponent(EditPasswordPage);
-registerComponent(ChangeProfilePage);
-registerComponent(ChatPage);
+const router = new Router('#app');
 
-class MyComponent extends Block {
-  static componentName: 'MyComponent';
+const g = new GlobalEventBus();
 
-  protected getStateFromProps(): void {
-    this.state = {
-      notFoundMethod(e: Event) {
-        e.preventDefault();
-        window.history.pushState({}, '', `${window.location.origin}/404`);
-        renderDOM(new NotFoundPage());
-      },
-      errorPageMethod(e: Event) {
-        e.preventDefault();
-        window.history.pushState({}, '', `${window.location.origin}/500`);
-        renderDOM(new ErrorPage());
-      },
-      signInPageMethod(e: Event) {
-        e.preventDefault();
-        window.history.pushState({}, '', `${window.location.origin}/signin`);
-        renderDOM(new SignInPage());
-      },
-      signUpPageMethod(e: Event) {
-        e.preventDefault();
-        window.history.pushState({}, '', `${window.location.origin}/signup`);
-        renderDOM(new SignUpPage());
-      },
-      profileMethod(e: Event) {
-        e.preventDefault();
-        window.history.pushState({}, '', `${window.location.origin}/profile`);
-        renderDOM(new ProfilePage());
-      },
-      editPasswordMethod(e: Event) {
-        e.preventDefault();
-        window.history.pushState(
-          {},
-          '',
-          `${window.location.origin}/edit-password`
-        );
-        renderDOM(new EditPasswordPage());
-      },
-      changeProfilePageMethod(e: Event) {
-        e.preventDefault();
-        window.history.pushState(
-          {},
-          '',
-          `${window.location.origin}/change-profile`
-        );
-        renderDOM(new ChangeProfilePage());
-      },
-      chatPageMethod(e: Event) {
-        e.preventDefault();
-        window.history.pushState({}, '', `${window.location.origin}/chat`);
-        renderDOM(new ChatPage());
-      },
-    };
-  }
+const userController = new UserController(router);
+const chatController = new ChatController();
+const messagesController = new MessagesController();
 
-  render() {
-    return `
-      <nav>
-        <ul class="ul-wrapper">
-          <li>
-            {{{Button
-              type='button'
-              text="Авторизация"
-              onClick=signInPageMethod
-            }}}
-          </li>
-          <li>
-            {{{Button
-              type='button'
-              text="Регистрация"
-              onClick=signUpPageMethod
-            }}}
-          </li>
-          <li>
-            {{{Button
-              type='button'
-              text="404"
-              onClick=notFoundMethod
-            }}}
-          </li>
-          <li>
-            {{{Button
-              type='button'
-              text="500"
-              onClick=errorPageMethod
-            }}}
-          </li>
-          <li>
-            {{{Button
-              type='button'
-              text="Профиль"
-              onClick=profileMethod
-            }}}
-          </li>
-          <li>
-            {{{Button
-              type='button'
-              text="Изменить пароль"
-              onClick=editPasswordMethod
-            }}}
-          </li>
-          <li>
-            {{{Button
-              type='button'
-              text="Изменить данные"
-              onClick=changeProfilePageMethod
-            }}}
-          </li>
-          <li>
-            {{{Button
-              type='button'
-              text="Чат"
-              onClick=chatPageMethod
-            }}}
-          </li>
-        </ul>
-      </nav>
-    `;
-  }
+const assets = { styles, icons, images };
+const initProps = { ...assets, router };
+
+const login = new Login(initProps);
+
+const signup = new Signup(initProps);
+
+const chat = new Chat(initProps);
+
+const profileInfo = new ProfileInfo(initProps);
+
+const profileChange = new ProfileChange(initProps);
+
+const profilePassword = new ProfilePassword(initProps);
+
+function onGetUserSucceed(xhr: XMLHttpRequest) {
+  const d = JSON.parse(xhr.responseText);
+  user.setData(d);
+
+  g.EventBus.emit(GlobalEventBus.EVENTS.USERDATA_UPDATED, user);
+  router.go(
+    window.location.pathname === '/' ? '/chats' : window.location.pathname,
+  );
 }
-document.addEventListener('DOMContentLoaded', () => {
-  renderDOM(new MyComponent());
-});
+
+function onGetUserFailed() {
+  router.go(window.location.pathname === '/signup' ? '/signup' : '/');
+}
+
+g.EventBus.on(
+  GlobalEventBus.EVENTS.ACTION_INIT,
+  userController.init.bind(userController),
+);
+
+g.EventBus.on(
+  GlobalEventBus.EVENTS.ACTION_GETUSER,
+  userController.getUser.bind(userController),
+);
+g.EventBus.on(GlobalEventBus.EVENTS.ACTION_GETUSER_SUCCEED, onGetUserSucceed);
+g.EventBus.on(GlobalEventBus.EVENTS.ACTION_GETUSER_FAILED, onGetUserFailed);
+
+g.EventBus.on(GlobalEventBus.EVENTS.VALIDATE_LOGIN, validateLogin);
+g.EventBus.on(
+  GlobalEventBus.EVENTS.ACTION_LOGIN,
+  userController.login.bind(userController),
+);
+g.EventBus.on(
+  GlobalEventBus.EVENTS.ACTION_LOGIN_SUCCEED,
+  chatController.getChats.bind(chatController),
+);
+g.EventBus.on(GlobalEventBus.EVENTS.VALIDATE_SIGNUP, validateSignup);
+g.EventBus.on(
+  GlobalEventBus.EVENTS.ACTION_SIGNUP,
+  userController.signup.bind(userController),
+);
+g.EventBus.on(GlobalEventBus.EVENTS.VALIDATE_SAVEINFO, validateSaveInfo);
+g.EventBus.on(
+  GlobalEventBus.EVENTS.ACTION_SAVEINFO,
+  userController.saveInfo.bind(userController),
+);
+
+g.EventBus.on(
+  GlobalEventBus.EVENTS.VALIDATE_SAVEPASSWORD,
+  validateSavePassword,
+);
+g.EventBus.on(
+  GlobalEventBus.EVENTS.ACTION_SAVEPASSWORD,
+  userController.savePassword.bind(userController),
+);
+g.EventBus.on(
+  GlobalEventBus.EVENTS.ACTION_LOGOUT,
+  userController.logout.bind(userController),
+);
+g.EventBus.on(
+  GlobalEventBus.EVENTS.ACTION_CHANGEAVATAR,
+  userController.changeAvatar.bind(userController),
+);
+g.EventBus.on(GlobalEventBus.EVENTS.VALIDATE_SENDMESSAGE, validateSendMessage);
+g.EventBus.on(
+  GlobalEventBus.EVENTS.ACTION_SENDMESSAGE,
+  messagesController.sendMessage.bind(messagesController),
+);
+g.EventBus.on(GlobalEventBus.EVENTS.VALIDATE_ADDCHATUSER, validateAddChatUser);
+g.EventBus.on(
+  GlobalEventBus.EVENTS.ACTION_ADDCHATUSER,
+  chatController.addChatUser.bind(chatController),
+);
+g.EventBus.on(
+  GlobalEventBus.EVENTS.ACTION_FINDUSER,
+  userController.findUser.bind(userController),
+);
+g.EventBus.on(
+  GlobalEventBus.EVENTS.VALIDATE_DELETECHATUSER,
+  validateDeleteChatUser,
+);
+g.EventBus.on(
+  GlobalEventBus.EVENTS.ACTION_DELETECHATUSER,
+  chatController.deleteChatUser.bind(chatController),
+);
+g.EventBus.on(
+  GlobalEventBus.EVENTS.ACTION_DELETECHAT,
+  chatController.deleteChat.bind(chatController),
+);
+
+g.EventBus.on(
+  GlobalEventBus.EVENTS.ACTION_GETCHATS,
+  chatController.getChats.bind(chatController),
+);
+g.EventBus.on(
+  GlobalEventBus.EVENTS.ACTION_GETCHATTOKEN,
+  chatController.getChatToken.bind(chatController),
+);
+g.EventBus.on(
+  GlobalEventBus.EVENTS.ACTION_GETCHATUSERS,
+  chatController.getChatUsers.bind(chatController),
+);
+g.EventBus.on(GlobalEventBus.EVENTS.VALIDATE_CREATECHAT, validateCreateChat);
+g.EventBus.on(
+  GlobalEventBus.EVENTS.ACTION_CREATECHAT,
+  chatController.createChat.bind(chatController),
+);
+g.EventBus.on(
+  GlobalEventBus.EVENTS.ACTION_CONNECTCHAT,
+  messagesController.connectChat.bind(messagesController),
+);
+
+router
+  .use('/', login)
+  .use('/signup', signup)
+  .use('/chats', chat)
+  .use('/settings', profileInfo)
+  .use('/settings-change', profileChange)
+  .use('/settings-password', profilePassword)
+  .start();
+
+g.EventBus.emit(GlobalEventBus.EVENTS.ACTION_INIT);
