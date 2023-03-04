@@ -1,17 +1,18 @@
 .form-signup-spacer {
-    height: 50px;
+  height: 50px;
 }
 
 .signup-form-button-primary {
-    color: #FFFFFF;
-    background: $primary-background;
-    border-radius: 8px;
-    &:hover {
-        background: $primary-background-hover;
-    }
+  color: #fff;
+  background: $primary-background;
+  border-radius: 8px;
+
+  &:hover {
+    background: $primary-background-hover;
+  }
 }
 
 .signup-form-button-secondary {
-    color: #3369F3;
-    background: #FFFFFF;
+  color: #3369f3;
+  background: #fff;
 }

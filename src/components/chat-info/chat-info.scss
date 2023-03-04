@@ -1,90 +1,86 @@
 .chat-info-container {
-    width: 100%;
-    border-bottom: 1px solid #eaeaea;
-    transition: border-bottom 0.5s;
-    cursor: pointer;
-    &:hover {
-        border-bottom: 1px solid #3369f3;
-    }
+  width: 100%;
+  border-bottom: 1px solid #eaeaea;
+  transition: border-bottom 0.5s;
+  cursor: pointer;
+
+  &:hover {
+    border-bottom: 1px solid #3369f3;
+  }
 }
 
 .chat-info {
-    display: grid;
-    grid-template-areas:
-        "avatar name time"
-        "avatar message count";
-    grid-template-rows: 13px 30px;
-    grid-template-columns: 47px 1fr 24px;
-    row-gap: 5px;
-    column-gap: 10px;
-
-    padding: 10px 0;
+  display: grid;
+  grid-template-areas:
+    "avatar name time"
+    "avatar message count";
+  /* stylelint-disable */
+  grid-template-rows: 13px 30px;
+  grid-template-columns: 47px 1fr 24px;
+  row-gap: 5px;
+  column-gap: 10px;
+  padding: 10px 0;
 }
 
 .chat-avatar {
-    grid-area: avatar;
+  grid-area: avatar;
 }
 
 .avatar-image {
-    height: 47px;
-    width: 47px;
-    border-radius: 50%;
+  height: 47px;
+  width: 47px;
+  border-radius: 50%;
 }
 
 .chat-name {
-    grid-area: name;
-
-    font-family: $font-family;
-    font-size: 13px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 13px;
-    text-align: left;
-    color: #1E1E1E;
+  grid-area: name;
+  font-family: $font-family;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 13px;
+  text-align: left;
+  color: #1e1e1e;
 }
 
 .chat-time {
-    grid-area: time;
-
-    font-family: $font-family;
-    font-size: 9px;
-    font-style: normal;
-    line-height: 13px;
-    text-align: right;
-    color: #999999;
+  grid-area: time;
+  font-family: $font-family;
+  font-size: 9px;
+  font-style: normal;
+  line-height: 13px;
+  text-align: right;
+  color: #999;
 }
 
 .chat-last-message {
-    grid-area: message;
-    
-    font-family: $font-family;
-    font-size: 12px;
-    font-style: normal;
-    line-height: 15px;
-    text-align: left;
-    color: #999999;
-    overflow: hidden;
+  grid-area: message;
+  font-family: $font-family;
+  font-size: 12px;
+  font-style: normal;
+  line-height: 15px;
+  text-align: left;
+  color: #999;
+  overflow: hidden;
 }
 
 .chat-unread-count-container {
-    grid-area: count;
-
-    display: flex;
-    margin: auto auto 0 auto;
-
-    border-radius: 50%;
-    width: 20px;
-    height: 20px;
-    background-color: #3369f3;
+  grid-area: count;
+  display: flex;
+  margin: auto auto 0;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  background-color: #3369f3;
 }
 
 .chat-unread-count {
-    margin: auto;
-    font-family: $font-family;
-    font-size: 11px;
-    font-style: normal;
-    line-height: 12px;
-    letter-spacing: 0em;
-    text-align: center;
-    color: #ffffff;
+  margin: auto;
+  font-family: $font-family;
+  font-size: 11px;
+  font-style: normal;
+  line-height: 12px;
+  letter-spacing: 0;
+  text-align: center;
+  color: #fff;
 }
