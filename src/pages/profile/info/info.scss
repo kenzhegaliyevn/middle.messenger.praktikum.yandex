@@ -1,162 +1,163 @@
 .profile-container {
-  display: flex;
-  width: 100%;
+    display: flex;
+    width: 100%;
 }
 
 .profile-return {
-  display: flex;
-  flex-grow: 0;
-  flex-shrink: 0;
-  width: 64px;
-  background-color: #fbfbfb;
-  border-right: 1px solid #eaeaea;
+    display: flex;
+    flex-grow: 0;
+    flex-shrink: 0;
+
+    width: 64px;
+    background-color: #fbfbfb;
+    border-right: 1px solid #eaeaea;
 }
 
 .profile-return-button {
-  margin: auto;
-  width: 11px;
+    margin: auto;
+    width: 11px;
 }
 
 .profile-info-container {
-  display: flex;
-  flex-grow: 1;
-  flex-shrink: 1;
+    display: flex;
+    flex-grow: 1;
+    flex-shrink: 1;
 }
 
 .profile-info {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  flex-basis: 510px;
-  margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    flex-basis: 510px;
+    margin: auto;
 }
 
 .profile-avatar-image {
-  height: 130;
-  width: 130;
-  border-radius: 50%;
-  margin: auto;
+    height: 130;
+    width: 130;
+    border-radius: 50%;
+    margin: auto;
 }
 
 .profile-avatar-wrapper {
-  position: relative;
-  height: 130px;
-  width: 130px;
+    position: relative;
+    height: 130px;
+    width: 130px;
 }
 
 .profile-change-avatar-container {
-  display: flex;
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  margin: 0;
-  border-radius: 50%;
-  background: rgb(29 106 154 / 72%);
-  visibility: hidden;
-  opacity: 0;
-  transition: opacity 0.2s, visibility 0.2s;
+    display:flex;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: 0;
+    border-radius: 50%;
+    background: rgba(29, 106, 154, 0.72);
+    visibility: hidden;
+    opacity: 0;
+    
+    transition: opacity .2s, visibility .2s;    
 }
 
 .profile-change-avatar-text {
-  margin: auto;
-  font-family: $font-family;
-  font-style: normal;
-  font-size: 13px;
-  line-height: 14px;
-  text-align: center;
-  color: #fff;
+    margin: auto;
+
+    font-family: $font-family;
+    font-style: normal;
+    font-size: 13px;
+    line-height: 14px;
+    text-align: center;
+    color: #FFFFFF;
 }
 
 .profile-avatar-wrapper:hover .profile-change-avatar-container {
-  visibility: visible;
-  opacity: 1;
+    visibility: visible;
+    opacity: 1;
 }
 
 .profile-display-name {
-  margin: 20px;
-  font-family: $font-family;
-  font-style: normal;
-  font-weight: 600;
-  font-size: 16px;
-  line-height: 16px;
-  color: #1e1e1e;
-}
+    margin: 20px;
 
+    font-family: $font-family;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 16px;
+    /* identical to box height, or 100% */
+    color: #1e1e1e;
+}
 .profile-info-fields-container {
-  width: 100%;
-  padding: 20px 0;
+    width: 100%;
+    padding: 20px 0;
 }
 
 .profile-info-field {
-  display: flex;
-  align-items: stretch;
-  width: 100%;
-  box-sizing: border-box;
-  padding: 10px 0;
-  border-bottom: 1px solid #eaeaea;
-
-  &:last-of-type {
-    border: 0;
-  }
+    display: flex;
+    align-items: stretch;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px 0 10px 0;
+    border-bottom: 1px solid #eaeaea;
+    &:last-of-type {
+        border: 0;
+    }
 }
 
 .profile-info-field-name {
-  font-family: $font-family;
-  font-style: normal;
-  font-size: 13px;
-  line-height: 13px;
-  color: #1e1e1e;
-  white-space: nowrap;
+    font-family: $font-family;
+    font-style: normal;
+    font-size: 13px;
+    line-height: 13px;
+    color: #1e1e1e;
+    white-space: nowrap;
 }
 
 .profile-info-field-value {
-  flex-grow: 1;
-  flex-shrink: 1;
-  font-family: $font-family;
-  font-style: normal;
-  font-size: 13px;
-  line-height: 13px;
-  text-align: right;
-  color: #999;
+    flex-grow: 1;
+    flex-shrink: 1;
+
+    font-family: $font-family;
+    font-style: normal;
+    font-size: 13px;
+    line-height: 13px;
+    text-align: right;
+    color: #999999;
 }
 
 .profile-info-link {
-  width: 100%;
-  box-sizing: border-box;
-  padding: 10px 0;
-  border-bottom: 1px solid #eaeaea;
-
-  &:last-of-type {
-    border: 0;
-  }
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px 0 10px 0;
+    border-bottom: 1px solid #eaeaea;
+    &:last-of-type {
+        border: 0;
+    }
 }
-
 .profile-info-link-change-info {
-  font-family: $font-family;
-  font-style: normal;
-  font-size: 13px;
-  line-height: 13px;
-  color: #3369f3;
+    font-family: $font-family;
+    font-style: normal;
+    font-size: 13px;
+    line-height: 13px;
+    color: #3369f3;
 }
-
 .profile-info-link-change-password {
-  font-family: $font-family;
-  font-style: normal;
-  font-size: 13px;
-  line-height: 13px;
-  color: #3369f3;
+    font-family: $font-family;
+    font-style: normal;
+    font-size: 13px;
+    line-height: 13px;
+    color: #3369f3;
 }
-
 .profile-info-link-exit {
-  font-family: $font-family;
-  font-style: normal;
-  font-size: 13px;
-  line-height: 13px;
-  color: #f00;
+    font-family: $font-family;
+    font-style: normal;
+    font-size: 13px;
+    line-height: 13px;
+    color: #FF0000;
 }
 
 .form-profile-spacer {
-  height: 100px;
+    height: 100px;
 }

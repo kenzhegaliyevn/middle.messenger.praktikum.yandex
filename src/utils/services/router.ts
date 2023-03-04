@@ -1,76 +1,81 @@
+
 import Route from './route';
 
+
 export default class Router {
-  private static __instance: Router;
+    private static __instance: Router;
 
-  _currentRoute: Route;
+    _currentRoute: Route;
 
-  private _rootQuery: string;
+    private _rootQuery: string;
 
-  routes: Route[];
+    routes: Route[];
 
-  history: History;
+    history: History;
 
-  constructor(rootQuery: string) {
-    if (Router.__instance) {
-      return Router.__instance;
+
+    private constructor(rootQuery: string) {
+
+        this.routes = [];
+        this.history = window.history;
+        this._rootQuery = rootQuery;
     }
 
-    this.routes = [];
-    this.history = window.history;
-    this._rootQuery = rootQuery;
-
-    Router.__instance = this;
-  }
-
-  use(pathname: string, block: any) {
-    const route = new Route(pathname, block, {
-      rootQuery: this._rootQuery,
-    });
-
-    this.routes.push(route);
-
-    return this;
-  }
-
-  start() {
-    window.onpopstate = (event: PopStateEvent) => {
-      this._onRoute((event.currentTarget as Window).location.pathname);
-    };
-  }
-
-  _onRoute(pathname: string) {
-    const route = this.getRoute(pathname);
-    if (!route) {
-      return;
+    public static getInstance(rootQuery: string) {
+        if (!Router.__instance) {
+            Router.__instance = new Router(rootQuery);
+        }
+        return Router.__instance;
     }
 
-    if (this._currentRoute && this._currentRoute !== route) {
-      this._currentRoute.leave();
+    use(pathname: string, block: any) {
+        const route = new Route(pathname, block, { rootQuery: this._rootQuery });
+
+        this.routes.push(route);
+
+        return this;
     }
 
-    this._currentRoute = route;
-    route.render();
-  }
+    start() {
+        window.onpopstate = ((event: PopStateEvent) => {
+            this._onRoute((event.currentTarget as Window).location.pathname);
+        });
 
-  go(pathname: string) {
-    this.history.pushState({}, '', pathname);
-    this._onRoute(pathname);
-  }
+        // this._onRoute(window.location.pathname);
+    }
 
-  back() {
-    this.history.back();
-  }
+    _onRoute(pathname: string) {
+        const route = this.getRoute(pathname);
+        if (!route) {
+            return;
+        }
 
-  forward() {
-    this.history.forward();
-  }
+        if (this._currentRoute && this._currentRoute !== route) {
+            this._currentRoute.leave();
+        }
 
-  getRoute(pathname: string) {
-    return this.routes.find((route) => route.match(pathname));
-  }
+        this._currentRoute = route;
+        route.render();
+    }
 
-  getCurrentRoute() {
-    return this._currentRoute;
-  }
+    go(pathname: string) {
+        this.history.pushState({}, '', pathname);
+        this._onRoute(pathname);
+    }
+
+    back() {
+        this.history.back();
+    }
+
+    forward() {
+        this.history.forward();
+    }
+
+    getRoute(pathname: string) {
+        return this.routes.find(route => route.match(pathname));
+    }
+
+    getCurrentRoute() {
+        return this._currentRoute;
+    }
 }

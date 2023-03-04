@@ -1,10 +1,16 @@
-const express = require('express');
+import express from "express";
+import path from "path";
 
 const app = express();
-const port = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3000;
+const DIST_PATH = "/dist";
 
-app.use(express.static('dist'));
+app.use(express.static(`${__dirname}${DIST_PATH}`));
 
-app.listen(port, () => {
-  console.log(`listen port ${port}`);
+app.get("*", (_req, res) => {
+    res.sendFile(path.join(__dirname, DIST_PATH, "/index.html"));
+});
+
+app.listen(PORT, () => {
+    console.log(`My Chat listening on port ${PORT}!`);
 });

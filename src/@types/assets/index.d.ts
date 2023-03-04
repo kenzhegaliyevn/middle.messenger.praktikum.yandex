@@ -1,5 +1,3 @@
-import Router from '../../utils/services/router';
-
 declare module '*.jpg' {
   const content: string;
   export default content;
@@ -10,13 +8,17 @@ declare module '*.png' {
   export default content;
 }
 
+// declare module '*.scss' {
+//   const content: Record<string, string>;
+//   export default content;
+// }
+
 declare module '*.scss' {
-  const content: Record<string, string>;
-  export default content;
+    const classes: { [key: string]: string };
+    export default classes;
 }
 
 declare module '*.svg' {
-  const content: any;
+  const content: string;
   export default content;
 }
-

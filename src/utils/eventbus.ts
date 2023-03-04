@@ -7,7 +7,7 @@ export default class EventBus {
 
   on(event: string, callback: (args: any) => void) {
     if (event === 'validate') {
-      console.log(this.listeners);
+        console.log(this.listeners);
     }
     if (!this.listeners[event]) {
       this.listeners[event] = [];
@@ -22,7 +22,7 @@ export default class EventBus {
     }
 
     this.listeners[event] = this.listeners[event].filter(
-      (listener: () => {}) => listener !== callback,
+      (listener: () => Record<string, unknown>) => listener !== callback,
     );
   }
 

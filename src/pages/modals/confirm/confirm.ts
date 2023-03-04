@@ -1,7 +1,7 @@
 import tmpl from './confirm.hbs';
 import compile from '../../../utils/compile';
 import { Button, ErrorMessage, Label } from '../../../components';
-import GlobalEventBus from '../../../utils/globaleventbus';
+import { GlobalEvents } from '../../../utils/globaleventbus';
 import { renderDOM } from '../../../utils/renderdom';
 import Page, { PageProps } from '../../../utils/page';
 
@@ -18,12 +18,12 @@ export class ModalConfirm extends Page {
     });
 
     this.g.EventBus.on(
-      GlobalEventBus.EVENTS.ACTION_DELETECHAT_SUCCEED,
+      GlobalEvents.ACTION_DELETECHAT_SUCCEED,
       this._onActionDeleteChatSucceed.bind(this));
   }
 
   private _onActionDeleteChatSucceed() {
-    this.g.EventBus.emit(GlobalEventBus.EVENTS.ACTION_GETCHATS);
+    this.g.EventBus.emit(GlobalEvents.ACTION_GETCHATS);
     const stub = new Label({
       text: 'Выберите чат чтобы отправить сообщение',
       class: this.props.styles['chat-stub'],
@@ -59,12 +59,12 @@ export class ModalConfirm extends Page {
           e.preventDefault();
 
           this._errorMessage.setProps({
-            'text': '',
-            'class': this.props.styles.error,
+            text: '',
+            class: this.props.styles.error,
           });
 
           try {
-            this.g.EventBus.emit(GlobalEventBus.EVENTS.ACTION_DELETECHAT, this.props.chatId);
+            this.g.EventBus.emit(GlobalEvents.ACTION_DELETECHAT, this.props.chatId);
 
           } catch (error) {
             console.log('Error: ', error);

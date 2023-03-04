@@ -1,8 +1,9 @@
 import tmpl from './add-user.hbs';
 import compile from '../../../utils/compile';
 import { Button, ErrorMessage, Input } from '../../../components';
-import GlobalEventBus from '../../../utils/globaleventbus';
+import { GlobalEvents } from '../../../utils/globaleventbus';
 import Page, { PageProps } from '../../../utils/page';
+import { FormDataType } from '../../../utils/types';
 
 export class ModalAddUser extends Page {
 
@@ -17,23 +18,23 @@ export class ModalAddUser extends Page {
     });
 
     this.g.EventBus.on(
-      GlobalEventBus.EVENTS.VALIDATE_ADDCHATUSER_FAILED,
+      GlobalEvents.VALIDATE_ADDCHATUSER_FAILED,
       this._onValidateAddChatUserFailed.bind(this));
     this.g.EventBus.on(
-      GlobalEventBus.EVENTS.ACTION_ADDFINDUSER_FAILED,
+      GlobalEvents.ACTION_ADDFINDUSER_FAILED,
       this._onActionFindUserFailed.bind(this));
     this.g.EventBus.on(
-      GlobalEventBus.EVENTS.ACTION_ADDFINDUSER_SUCCEED,
+      GlobalEvents.ACTION_ADDFINDUSER_SUCCEED,
       this._onActionFindUserSucceed.bind(this));
     this.g.EventBus.on(
-      GlobalEventBus.EVENTS.ACTION_ADDCHATUSER_FAILED,
-      this._onActionAddChatUserFailed.bind(this));
+        GlobalEvents.ACTION_ADDCHATUSER_FAILED,
+        this._onActionAddChatUserFailed.bind(this));
     this.g.EventBus.on(
-      GlobalEventBus.EVENTS.ACTION_ADDCHATUSER_SUCCEED,
+      GlobalEvents.ACTION_ADDCHATUSER_SUCCEED,
       this._onActionAddChatUserSucceed.bind(this));
   }
 
-  private _onValidateAddChatUserFailed(formData: { [index: string]: any }) {
+  private _onValidateAddChatUserFailed(formData: FormDataType) {
 
     Object.keys(formData).forEach(key => {
       if (!formData[key].isValid) {
@@ -48,36 +49,36 @@ export class ModalAddUser extends Page {
     console.log('Got data: ', JSON.parse(data));
     const text = JSON.parse(data).reason;
     this._errorMessage.setProps({
-      'text': text,
-      'class': this.props.styles.error,
+      text: text,
+      class: this.props.styles.error,
     });
     console.log('Error on find user: ', text);
   }
 
   private _onActionFindUserSucceed(data: any) {
     console.log('_onActionFindUserSucceed (add user): ', data);
-    this.g.EventBus.emit(GlobalEventBus.EVENTS.ACTION_ADDCHATUSER, {
+    this.g.EventBus.emit(GlobalEvents.ACTION_ADDCHATUSER, {
       userId: data.id,
       chatId: this.props.chatId,
     });
-    this.g.EventBus.emit(GlobalEventBus.EVENTS.ACTION_GETCHATUSERS, this.props.chatId);
-  }
+    this.g.EventBus.emit(GlobalEvents.ACTION_GETCHATUSERS, this.props.chatId);
+}
 
 
 
   private _onActionAddChatUserFailed(data: string) {
     const text = JSON.parse(data).reason;
     this._errorMessage.setProps({
-      'text': text,
-      'class': this.props.styles.error,
+      text: text,
+      class: this.props.styles.error,
     });
     console.log('Error on add chat user: ', text);
   }
 
   private _onActionAddChatUserSucceed() {
     this._errorMessage.setProps({
-      'text': 'User added',
-      'class': this.props.styles.error,
+      text: 'User added',
+      class: this.props.styles.error,
     });
   }
 
@@ -117,17 +118,17 @@ export class ModalAddUser extends Page {
           e.preventDefault();
 
           this._errorMessage.setProps({
-            'text': '',
-            'class': this.props.styles.error,
+            text: '',
+            class: this.props.styles.error,
           });
 
           const inputs = [inputUserLogin];
 
           try {
-            this.g.EventBus.emit(GlobalEventBus.EVENTS.VALIDATE_ADDCHATUSER, inputs);
-            this.g.EventBus.emit(GlobalEventBus.EVENTS.ACTION_FINDUSER, inputs, {
-              succeedEvent: GlobalEventBus.EVENTS.ACTION_ADDFINDUSER_SUCCEED,
-              failedEvent: GlobalEventBus.EVENTS.ACTION_ADDFINDUSER_FAILED,
+            this.g.EventBus.emit(GlobalEvents.VALIDATE_ADDCHATUSER, inputs);
+            this.g.EventBus.emit(GlobalEvents.ACTION_FINDUSER, inputs, {
+              succeedEvent: GlobalEvents.ACTION_ADDFINDUSER_SUCCEED,
+              failedEvent: GlobalEvents.ACTION_ADDFINDUSER_FAILED,
             });
 
           } catch (error) {

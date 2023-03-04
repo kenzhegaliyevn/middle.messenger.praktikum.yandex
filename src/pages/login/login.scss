@@ -1,22 +1,28 @@
+
+// Тестовые классы
+
+
 .button-primary {
-  background-color: red;
+    background-color: red;
 }
 
 .button-secondary {
-  background-color: blue;
+    background-color: blue;
 }
 
+///
+
 .form-login-spacer {
-  height: 100px;
+    height: 100px;
 }
 
 .login-form-button-primary {
-  color: #fff;
-  background: $primary-background;
-  border-radius: 8px;
+    color: #FFFFFF;
+    background: $primary-background;
+    border-radius: 8px;
 }
 
 .login-form-button-secondary {
-  color: #3369f3;
-  background: #fff;
+    color: #3369F3;
+    background: #FFFFFF;
 }
