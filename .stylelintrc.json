@@ -1,5 +1,5 @@
 {
-  "extends": ["stylelint-config-standard"],
+  "extends": ["stylelint-config-standard-scss", "stylelint-config-standard"],
   "rules": {
     "color-hex-case": "lower",
     "scss/at-import-partial-extension": "always",
