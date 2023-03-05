@@ -178,6 +178,7 @@ export class Conversation extends Page {
             class: `${this.props.styles.input} ${this.props.styles['input-conversation-message-box']}`,
             name: 'message',
             placeholder: 'Сообщение',
+            validationType: 'message',
         });
 
         const linkSend = new Link({
