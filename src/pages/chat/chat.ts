@@ -70,12 +70,10 @@ export class Chat extends Page {
 
             let timeString = '';
             if (chat.last_message?.time) {
-                // TODO: Сформировать корректный формат времени последнего сообщения
                 const time = new Date(chat.last_message.time);
                 timeString = `${time.getHours()}:${time.getMinutes()}`;
             }
             const textString = chat.last_message?.content ? chat.last_message.content : '';
-
             this._chatInfos.push(new ChatInfo({
                 title: chat.title,
                 avatar: chat.avatar ? chat.avatar : this.props.icons.conversation,
