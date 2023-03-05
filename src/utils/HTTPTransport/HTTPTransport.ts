@@ -7,8 +7,8 @@ enum Method {
 
 type Options = {
     method?: Method;
-    data?: any;
-    headers?: any;
+    data?: unknown;
+    headers?: unknown;
 };
 
 function queryStringify(data: Record<string, any>) {

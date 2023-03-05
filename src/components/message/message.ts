@@ -10,8 +10,8 @@ export interface MessageProps {
     file?: string,
     date?: string,
     isRead?: boolean,
-    styles: Record<string, any>,
-    icons?: Record<string, any>,
+    styles: Record<string, unknown>,
+    icons?: Record<string, unknown>,
 }
 
 

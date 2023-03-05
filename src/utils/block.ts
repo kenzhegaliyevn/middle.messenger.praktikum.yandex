@@ -66,13 +66,13 @@ export default class Block<P extends object> {
         this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
     }
 
-    _componentDidMount(props: any) {
+    _componentDidMount(props: unknown) {
         this.componentDidMount(props);
         this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
     }
 
     // Может переопределять пользователь, необязательно трогать
-    componentDidMount(_props: any) {
+    componentDidMount(_props: unknown) {
         return;
     }
 
@@ -80,7 +80,7 @@ export default class Block<P extends object> {
         this.eventBus().emit(Block.EVENTS.FLOW_CDM);
     }
 
-    _componentDidUpdate(oldProps: any, newProps: any) {
+    _componentDidUpdate(oldProps: unknown, newProps: unknown) {
         const response = this.componentDidUpdate(oldProps, newProps);
         if (!response) {
             return;
@@ -89,11 +89,11 @@ export default class Block<P extends object> {
     }
 
     // Может переопределять пользователь, необязательно трогать
-    componentDidUpdate(_oldProps: any, _newProps: any) {
+    componentDidUpdate(_oldProps: any, _newProps: unknown) {
         return true;
     }
 
-    setProps = (nextProps: any) => {
+    setProps = (nextProps: unknown) => {
         if (!nextProps) {
             return;
         }

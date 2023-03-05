@@ -1,7 +1,7 @@
 import Block from "./block";
 
 export default function compile(
-    tmpl: (p: any) => string,
+    tmpl: (p: unknown) => string,
     props: any
 ): DocumentFragment {
     const fragment = document.createElement("template");

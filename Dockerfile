@@ -1,5 +1,5 @@
 FROM node:16.14
-WORKDIP /var/www
+WORKDIR /var/www
 COPY package*.json ./
 RUN npm install
 COPY . .

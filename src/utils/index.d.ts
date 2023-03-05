@@ -1,9 +1,9 @@
 declare module '*.hbs' {
-  const templateFunction: (param?: any) => string;
+  const templateFunction: (param?: unknown) => string;
   export default templateFunction;
 }
 
 declare module '*.handlebars' {
-  const templateFunction: (param?: any) => string;
+  const templateFunction: (param?: unknown) => string;
   export default templateFunction;
 }

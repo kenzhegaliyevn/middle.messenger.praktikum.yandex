@@ -5,13 +5,13 @@ import { renderDOM } from '../renderdom';
 export default class Route {
     _pathname: string;
 
-    _blockClass: any;
+    _blockClass: unknown;
 
     _block: Block<any>;
 
     _props: any;
 
-    constructor(pathname: string, view: any, props: any) {
+    constructor(pathname: string, view: unknown, props: unknown) {
         this._pathname = pathname;
         this._blockClass = view;
         this._props = props;
