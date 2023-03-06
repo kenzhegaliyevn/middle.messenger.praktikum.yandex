@@ -3,10 +3,9 @@ import compile from '../../utils/compile';
 
 import { Label, Input, Button, ErrorMessage } from '../../components';
 import { isValid } from '../../utils/validator';
-import GlobalEventBus from '../../utils/globaleventbus';
+import { GlobalEvents } from '../../utils/globaleventbus';
 import Page, { PageProps } from '../../utils/page';
-
-
+import { FormDataType } from '../../utils/types';
 
 export class Login extends Page {
 
@@ -14,12 +13,12 @@ export class Login extends Page {
 
   constructor(props: PageProps) {
     super('div', props);
-    this.g.EventBus.on(GlobalEventBus.EVENTS.VALIDATE_LOGIN_FAILED, this._onValidateLoginFailed.bind(this));
-    this.g.EventBus.on(GlobalEventBus.EVENTS.ACTION_LOGIN_FAILED, this._onActionLoginFailed.bind(this));
-    this.g.EventBus.on(GlobalEventBus.EVENTS.ACTION_LOGIN_SUCCEED, this._onActionLoginSucceed.bind(this));
+    this.g.EventBus.on(GlobalEvents.VALIDATE_LOGIN_FAILED, this._onValidateLoginFailed.bind(this));
+    this.g.EventBus.on(GlobalEvents.ACTION_LOGIN_FAILED, this._onActionLoginFailed.bind(this));
+    this.g.EventBus.on(GlobalEvents.ACTION_LOGIN_SUCCEED, this._onActionLoginSucceed.bind(this));
   }
 
-  private _onValidateLoginFailed(formData: { [index: string]: any }) {
+  private _onValidateLoginFailed(formData: FormDataType) {
 
     Object.keys(formData).forEach(key => {
       if (!formData[key].isValid) {
@@ -27,21 +26,21 @@ export class Login extends Page {
         element?.classList.add(this.props.styles['input-error']);
       }
     });
-    throw new Error('Validation Error');
+    throw new Error('Incorrect field value');
   }
 
   private _onActionLoginSucceed() {
-    this.g.EventBus.emit(GlobalEventBus.EVENTS.ACTION_GETUSER);
-    this.g.EventBus.emit(GlobalEventBus.EVENTS.ACTION_GETCHATS);
+    this.g.EventBus.emit(GlobalEvents.ACTION_GETUSER);
+    this.g.EventBus.emit(GlobalEvents.ACTION_GETCHATS);
   }
 
   private _onActionLoginFailed(data: XMLHttpRequest) {
     const text = JSON.parse(data.responseText).reason;
+    // throw new Error(text);
     this._errorMessage.setProps({
-      'text': text,
-      'class': this.props.styles.error,
+      text: text,
+      class: this.props.styles.error,
     });
-    console.log('Error on login: ', text);
   }
 
   private _onFocusChange(event: Event) {
@@ -90,12 +89,18 @@ export class Login extends Page {
 
           const inputs = [inputLogin, inputPassword];
 
+          inputs.forEach(input => input.element.classList.remove(this.props.styles['input-error']));
+          this._errorMessage.setProps({ text: '' });
+
           try {
-            this.g.EventBus.emit(GlobalEventBus.EVENTS.VALIDATE_LOGIN, inputs);
-            this.g.EventBus.emit(GlobalEventBus.EVENTS.ACTION_LOGIN, inputs, '/chats');
+            this.g.EventBus.emit(GlobalEvents.VALIDATE_LOGIN, inputs);
+            this.g.EventBus.emit(GlobalEvents.ACTION_LOGIN, inputs, '/chats');
 
           } catch (error) {
-            console.log('Error caught', error);
+            this._errorMessage.setProps({
+                text: error,
+                class: this.props.styles.error,
+            });
           }
         },
       },

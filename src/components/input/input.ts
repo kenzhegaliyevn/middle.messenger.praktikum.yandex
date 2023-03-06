@@ -4,18 +4,18 @@ import Block from '../../utils/block';
 import compile from '../../utils/compile';
 
 interface InputProps {
-  type: string;
-  name: string;
-  class?: string;
-  placeholder?: string;
-  value?: string;
-  validationType?: string;
-  accept?: string;
+  type: string,
+  name: string,
+  class?: string,
+  placeholder?: string,
+  value?: string,
+  validationType?: string,
+  accept?: string,
   events?: {
-    blur?: () => void;
-    focus?: () => void;
-    change?: (e: Event) => void;
-  };
+    blur?: () => void,
+    focus?: () => void,
+    change?: (e: Event) => void
+  }
 }
 
 export class Input extends Block<InputProps> {
@@ -24,6 +24,7 @@ export class Input extends Block<InputProps> {
   }
 
   render() {
+
     if (this.props.type === 'textarea') {
       return compile(tmplTextarea, this.props);
     }

@@ -1,7 +1,7 @@
 import tmpl from './create-chat.hbs';
 import compile from '../../../utils/compile';
 import { Button, ErrorMessage, Input } from '../../../components';
-import GlobalEventBus from '../../../utils/globaleventbus';
+import { GlobalEvents } from '../../../utils/globaleventbus';
 import Page, { PageProps } from '../../../utils/page';
 
 export class ModalCreateChat extends Page {
@@ -17,15 +17,15 @@ export class ModalCreateChat extends Page {
     });
 
     this.g.EventBus.on(
-      GlobalEventBus.EVENTS.VALIDATE_CREATECHAT_FAILED,
+      GlobalEvents.VALIDATE_CREATECHAT_FAILED,
       this._onValidateCreateChatFailed.bind(this));
     this.g.EventBus.on(
-      GlobalEventBus.EVENTS.ACTION_CREATECHAT_FAILED,
+      GlobalEvents.ACTION_CREATECHAT_FAILED,
       this._onActionCreateChatFailed.bind(this));
     this.g.EventBus.on(
-      GlobalEventBus.EVENTS.ACTION_CREATECHAT_SUCCEED,
+      GlobalEvents.ACTION_CREATECHAT_SUCCEED,
       this._onActionCreateChatSucceed.bind(this));
-  }
+    }
 
   private _onValidateCreateChatFailed(formData: { [index: string]: any }) {
 
@@ -41,8 +41,8 @@ export class ModalCreateChat extends Page {
   private _onActionCreateChatFailed(data: string) {
     const text = JSON.parse(data).reason;
     this._errorMessage.setProps({
-      'text': text,
-      'class': this.props.styles.error,
+      text: text,
+      class: this.props.styles.error,
     });
     console.log('Error on create chat: ', text);
   }
@@ -89,9 +89,9 @@ export class ModalCreateChat extends Page {
           const inputs = [inputChatName];
 
           try {
-            this.g.EventBus.emit(GlobalEventBus.EVENTS.VALIDATE_CREATECHAT, inputs);
-            this.g.EventBus.emit(GlobalEventBus.EVENTS.ACTION_CREATECHAT, inputs);
-            this.g.EventBus.emit(GlobalEventBus.EVENTS.ACTION_GETCHATS);
+            this.g.EventBus.emit(GlobalEvents.VALIDATE_CREATECHAT, inputs);
+            this.g.EventBus.emit(GlobalEvents.ACTION_CREATECHAT, inputs);
+            this.g.EventBus.emit(GlobalEvents.ACTION_GETCHATS);
 
           } catch (error) {
             console.log('Error: ', error);

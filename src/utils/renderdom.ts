@@ -1,6 +1,6 @@
 import Block from './block';
 
-export function renderDOM(query: string, block: Block) {
+export function renderDOM(query: string, block: Block<any>) {
   const root = document.querySelector(query);
 
   if (!root) {
@@ -8,6 +8,7 @@ export function renderDOM(query: string, block: Block) {
   }
 
   root.innerHTML = '';
+ // block.element.removeAttribute('style');
   root.appendChild(block.getContent());
 
   return root;

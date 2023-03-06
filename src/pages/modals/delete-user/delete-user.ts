@@ -1,7 +1,7 @@
 import tmpl from './delete-user.hbs';
 import compile from '../../../utils/compile';
 import { Button, ErrorMessage, Input } from '../../../components';
-import GlobalEventBus from '../../../utils/globaleventbus';
+import { GlobalEvents } from '../../../utils/globaleventbus';
 import Page, { PageProps } from '../../../utils/page';
 
 export class ModalDeleteUser extends Page {
@@ -17,19 +17,19 @@ export class ModalDeleteUser extends Page {
     });
 
     this.g.EventBus.on(
-      GlobalEventBus.EVENTS.VALIDATE_DELETECHATUSER_FAILED,
+      GlobalEvents.VALIDATE_DELETECHATUSER_FAILED,
       this._onValidateDeleteChatUserFailed.bind(this));
     this.g.EventBus.on(
-      GlobalEventBus.EVENTS.ACTION_DELETEFINDUSER_FAILED,
+      GlobalEvents.ACTION_DELETEFINDUSER_FAILED,
       this._onActionFindUserFailed.bind(this));
     this.g.EventBus.on(
-      GlobalEventBus.EVENTS.ACTION_DELETEFINDUSER_SUCCEED,
+      GlobalEvents.ACTION_DELETEFINDUSER_SUCCEED,
       this._onActionFindUserSucceed.bind(this));
     this.g.EventBus.on(
-      GlobalEventBus.EVENTS.ACTION_DELETECHATUSER_FAILED,
+      GlobalEvents.ACTION_DELETECHATUSER_FAILED,
       this._onActionDeleteChatUserFailed.bind(this));
     this.g.EventBus.on(
-      GlobalEventBus.EVENTS.ACTION_DELETECHATUSER_SUCCEED,
+      GlobalEvents.ACTION_DELETECHATUSER_SUCCEED,
       this._onActionDeleteChatUserSucceed.bind(this));
   }
 
@@ -48,35 +48,35 @@ export class ModalDeleteUser extends Page {
     console.log('Got data: ', JSON.parse(data));
     const text = JSON.parse(data).reason;
     this._errorMessage.setProps({
-      'text': text,
-      'class': this.props.styles.error,
+      text: text,
+      class: this.props.styles.error,
     });
     console.log('Error on find user: ', text);
   }
 
   private _onActionFindUserSucceed(data: any) {
     console.log('_onActionFindUserSucceed (delete user): ', data);
-    this.g.EventBus.emit(GlobalEventBus.EVENTS.ACTION_DELETECHATUSER, {
+    this.g.EventBus.emit(GlobalEvents.ACTION_DELETECHATUSER, {
       userId: data.id,
       chatId: this.props.chatId,
     });
 
-    this.g.EventBus.emit(GlobalEventBus.EVENTS.ACTION_GETCHATUSERS, this.props.chatId);
+    this.g.EventBus.emit(GlobalEvents.ACTION_GETCHATUSERS, this.props.chatId);
   }
 
   private _onActionDeleteChatUserFailed(data: string) {
     const text = JSON.parse(data).reason;
     this._errorMessage.setProps({
-      'text': text,
-      'class': this.props.styles.error,
+      text: text,
+      class: this.props.styles.error,
     });
     console.log('Error on add chat user: ', text);
   }
 
   private _onActionDeleteChatUserSucceed() {
     this._errorMessage.setProps({
-      'text': 'User deleted',
-      'class': this.props.styles.error,
+      text: 'User deleted',
+      class: this.props.styles.error,
     });
   }
 
@@ -117,17 +117,17 @@ export class ModalDeleteUser extends Page {
           e.preventDefault();
 
           this._errorMessage.setProps({
-            'text': '',
-            'class': this.props.styles.error,
+            text: '',
+            class: this.props.styles.error,
           });
 
           const inputs = [inputUserLogin];
 
           try {
-            this.g.EventBus.emit(GlobalEventBus.EVENTS.VALIDATE_DELETECHATUSER, inputs);
-            this.g.EventBus.emit(GlobalEventBus.EVENTS.ACTION_FINDUSER, inputs, {
-              succeedEvent: GlobalEventBus.EVENTS.ACTION_DELETEFINDUSER_SUCCEED,
-              failedEvent: GlobalEventBus.EVENTS.ACTION_DELETEFINDUSER_FAILED,
+            this.g.EventBus.emit(GlobalEvents.VALIDATE_DELETECHATUSER, inputs);
+            this.g.EventBus.emit(GlobalEvents.ACTION_FINDUSER, inputs, {
+              succeedEvent: GlobalEvents.ACTION_DELETEFINDUSER_SUCCEED,
+              failedEvent: GlobalEvents.ACTION_DELETEFINDUSER_FAILED,
             });
 
           } catch (error) {

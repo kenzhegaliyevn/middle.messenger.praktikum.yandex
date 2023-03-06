@@ -3,11 +3,11 @@ import Block from '../../utils/block';
 import compile from '../../utils/compile';
 
 export interface ImageProps {
-  src: string;
-  class?: string;
+  src: string,
+  class?: string,
   events?: {
-    click: (e: Event) => void;
-  };
+    click: (e: Event) => void
+  }
 }
 
 export class Image extends Block<ImageProps> {

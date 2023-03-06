@@ -3,11 +3,11 @@ import Block from '../../utils/block';
 import compile from '../../utils/compile';
 
 interface ButtonProps {
-  text: string;
-  class?: string;
+  text: string,
+  class?: string,
   events?: {
-    click: (e: Event) => void;
-  };
+    click: (e: Event) => void
+  }
 }
 
 export class Button extends Block<ButtonProps> {

@@ -3,46 +3,48 @@ import * as Handlebars from 'handlebars';
 import Block from './block';
 import compile from './compile';
 
-const jsdom = require('jsdom');
+import jsdom from 'jsdom';
 const { JSDOM } = jsdom;
 
 const dom = new JSDOM(
-  '<html><body><div id="app"></div></body></html>',
-  { url: 'http://localhost' },
-  { runScripts: 'dangerously' },
-);
+    '<html><body><div id="app"></div></body></html>',
+    {
+        url: 'http://localhost',
+        runScripts: 'dangerously'
+    },
+  );
 
 global.document = dom.window.document;
-global.window = dom.window;
+//global.window = document.defaultView;
 if (dom.window.document.defaultView) {
-  global.DocumentFragment = dom.window.document.defaultView.DocumentFragment;
+    global.DocumentFragment = dom.window.document.defaultView.DocumentFragment;
 }
 
 
-class Component extends Block {
-  constructor(props: any) {
-    super('div', props);
-  }  
+class Component extends Block<any> {
+    constructor(props: any) {
+        super('div', props);
+    }  
     
-  render() {
-    const tmpl = Handlebars.compile('<div>{{content}}</div>');
-    return compile(tmpl, this.props);
-  }
+    render() {
+        const tmpl = Handlebars.compile('<div>{{content}}</div>');
+        return compile(tmpl, this.props);
+    }
 }
 
 describe('Component', () => {
-  const component = new Component({ content: 'Test' });
+    const component = new Component({ content: 'Test' });
 
-  it('should render content', () => {
-    expect(component.getContent().innerHTML).equals('Test');
-  });
-
-  it('should change content', () => {
-    component.setProps({
-      content: 'New test',
+    it('should render content', () => {
+        expect(component.getContent().innerHTML).equals('Test');
     });
-    expect(component.getContent().innerHTML).equals('New test');
-  });
+
+    it('should change content', () => {
+        component.setProps({
+            content: 'New test',
+        });
+        expect(component.getContent().innerHTML).equals('New test');
+    });
 
 });
 
